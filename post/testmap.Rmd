@@ -1,0 +1,72 @@
+---
+title: "Mathematics Achievement of Grade 3 - 8 Students by US Counties"
+author: "Lok H. Chau"
+date: 2018-05-11T21:13:14-05:00
+categories: ["R"]
+tags: ["R Markdown", "plot", "regression"]
+output: html_document
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r results = 'hide', echo = FALSE, message = FALSE, warning = FALSE}
+library(tidyverse)
+library(sp)
+library(rgeos)
+library(rgdal)
+library(maptools)
+library(leaflet)
+library(scales)
+setwd('C:/Users/LokHeng/Desktop/SEDA/')
+naep <- read.csv('County/SEDA_county_poolsub_GCS_v20b.csv')
+naep <- filter(naep, subgroup == 'all')
+naep <- select(naep, 1:4, 'mn_avg_mth_ol')
+naep$countyid <- str_pad(naep$countyid, 5, 'left', '0')
+write.csv(naep, 'naep_pooled_by_county.csv')
+
+df_gsc_mth <- select(naep, countyid, mn_avg_mth_ol) %>% filter(!is.na(mn_avg_mth_ol))
+colnames(df_gsc_mth) <- c('GEOID','value')
+
+us.map <- readOGR(dsn = ".", layer = "cb_2017_us_county_20m", stringsAsFactors = FALSE)
+us.map <- us.map[!us.map$STATEFP %in% c("72", "66", "78", "60", "69",
+                                        "64", "68", "70", "74"),]
+us.map <- us.map[!us.map$STATEFP %in% c("81", "84", "86", "87", "89", "71", "76",
+                                        "95", "79"),]
+leafmap_mth <- merge(us.map, df_gsc_mth, by=c("GEOID"))
+
+popup_dat <- paste0("<strong>County: </strong>", 
+                    leafmap_mth$NAME, 
+                    "<br><strong>Value: </strong>", 
+                    leafmap_mth$value)
+
+pal <- colorNumeric("YlOrRd", domain = leafmap_mth$value)
+```
+
+<!-- A report from U.S. News [(link to article)](https://www.usnews.com/news/best-states/rankings/education/prek-12) shows that Massachusetts and New Hampshire were ranked first and second place in Grade 8th NAEP Mathematics Achievement Outcome, using the data from 2015, while Alabama, Louisiana, and Mississippi were ranked the bottom. -->
+
+<!-- ### Data Source -->
+
+<!-- The Stanford Education Data Archive (SEDA; seda.stanford.edu)1 is an initiative aimed at harnessing data to help scholars, policymakers, educators, and parents learn how to improve educational opportunity for all children. SEDA includes a range of detailed data on educational conditions, contexts, and outcomes in school districts and counties across the United States. It includes measures of academic achievement and achievement gaps for school districts and counties, as well as district-level measures of racial and socioeconomic composition, racial and socioeconomic segregation patterns, and other features of schooling systems. -->
+<!-- By making the data files available to the public, we hope that anyone who is interested can obtain detailed information about American schools, communities, and student success. We hope that researchers will use these data to generate evidence about what policies and contexts are most effective at increasing educational opportunity, and that such evidence will inform educational policy and practices. -->
+
+<!-- ### What are we measuring? -->
+
+<!-- Using the data provided by the Standard Education Data Archive (SEDA), -->
+
+<!-- The county mathematic achievement estimates are pooled across all grades (3 - 8) and years (2006 - 2016). The Estimates are in the grade-cohort standardized (GCS) scale. This scale is characterized by average national performance in each grade being equal to grade level for the cohort of students in 4th grade in 2009 (call this the "2009 cohort" for simplicity). That is, in this scale, average achievement of 4 is equivalent to average performance of 4th graders in 2009, average achievement of 5 is equivalent to average performance of 5th graders in the 2009 cohort (these students would be in 5th grade in 2010, assuming usual grade progression), and so forth. This means that, in this metric, achievement on average from grades 3 to 8 for the 2009 cohort is 5.5. A one-unit difference in this scale is interpretable as the average difference in skills between students one grade level apart in school for the 2009 cohort. This metric is comparable across the whole country and across grades and years, but not subjects. See section 7 "Scaling the Estimates" in the technical documentation, and Reardon, Kalogrides, and Ho (2017), for details. -->
+
+
+```{r echo = FALSE}
+leaflet(data = leafmap_mth) %>% addTiles() %>%
+  addPolygons(fillColor = ~pal(value), 
+              fillOpacity = 0.8, 
+              color = "#BDBDC3", 
+              weight = 1,
+              popup = popup_dat) %>%
+  addLegend("bottomright", pal = pal, values = ~value,
+            title = "Avg Grade Level",
+            opacity = 1
+  ) %>% setView(lat = 40.7529453, lng = -94.3954066, zoom = 4)
+```
+
