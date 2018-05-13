@@ -6,18 +6,19 @@
     <description>Recent content in Posts on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
+    <lastBuildDate>Sun, 13 May 2018 01:13:15 -0500</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title></title>
+      <title>Average Mathematics Achievement by US Counties From Year of 2009 - 2016</title>
       <link>/post/testmap/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <pubDate>Sun, 13 May 2018 01:13:15 -0500</pubDate>
       
       <guid>/post/testmap/</guid>
-      <description>—title: “Average Mathematics Achievement by US Counties From Year of 2009 - 2016”author: “Lok H. Chau”date: 2018-05-13T1:13:14-05:00categories: [“R”]tags: [“R Markdown”, “plot”, “regression”]output: html_document—Using the data from SEDA, we can descriptively show the mathematics achievement outcomes of the US counties and how they compare among each other.
-Without too much technical details, each county is given an estimate of the average grade level of mathematics performance pooled across all students from grade 3 to 8 and from the years of 2009 to 2016.</description>
+      <description>Using the data from SEDA, we can descriptively show the mathematics achievement outcomes of the US counties and how they compare among each other.
+Without too much technical details, each county is given an estimate of the average grade level of mathematics performance pooled across all students from grade 3 to 8 and from the years of 2009 to 2016. The estimates from all counties are then compared to see which were performing above or below average.</description>
     </item>
     
   </channel>
