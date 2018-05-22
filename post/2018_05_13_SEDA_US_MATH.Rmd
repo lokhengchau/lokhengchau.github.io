@@ -69,6 +69,8 @@ leaflet(data = leafmap_mth) %>% addTiles() %>%
   ) %>% setView(lat = 40.7529453, lng = -94.3954066, zoom = 4)
 ```
 
-This visualization is purely exploratory in nature and no claims are made, but the pattens observed are interesting nonetheless.
+<p></p>
+
+This visualization is purely exploratory in nature and no claims are made, but the patterns observed are very interesting nonetheless.
 
 Technical information and details about how the the data were collected and how the grade levels were estimated can be found in the webite of [SEDA](https://cepa.stanford.edu/seda/overview).
