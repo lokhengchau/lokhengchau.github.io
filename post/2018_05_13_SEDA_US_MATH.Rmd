@@ -49,12 +49,12 @@ popup_dat <- paste0("<strong>County: </strong>",
                     "<br><strong>Value: </strong>", 
                     leafmap_mth$value)
 
-pal <- colorFactor("RdBu", domain = leafmap_mth$value, reverse = TRUE)
+pal <- colorFactor("RdBu", domain = leafmap_mth$value, reverse = FALSE)
 ```
 
-Using the data from [SEDA](https://cepa.stanford.edu/seda/overview), we can descriptively show the mathematics achievement outcomes of the US counties and how they compare among each other. 
+Using the data from Standord Educationa Data Archive [(SEDA)](https://cepa.stanford.edu/seda/overview), we can descriptively show the mathematics achievement outcomes of the US counties and how they compare among each other. 
 
-Without too much technical details, each county is given an estimate of the average grade level of mathematics performance pooled across all students from grade 3 to 8 and from the years of 2009 to 2016. The estimates from all counties are then compared to see which were performing above or below average.
+Each county is given an estimate of the average grade level of mathematics performance pooled across all students from grade 3 to 8 and from the years of 2009 to 2016. Since only students from grade 3 to 8 are included in the data, the estiamtes are scaled so that achievement on average is 5.5 grade level. The estimates from all counties are then compared with this average to see how many grade levels are they above or below this average.
 
 ```{r echo = FALSE}
 leaflet(data = leafmap_mth) %>% addTiles() %>%
@@ -69,3 +69,6 @@ leaflet(data = leafmap_mth) %>% addTiles() %>%
   ) %>% setView(lat = 40.7529453, lng = -94.3954066, zoom = 4)
 ```
 
+This visualization is purely exploratory in nature and no claims are made, but the pattens observed are interesting nonetheless.
+
+Technical information and details about how the the data were collected and how the grade levels were estimated can be found in the webite of [SEDA](https://cepa.stanford.edu/seda/overview).

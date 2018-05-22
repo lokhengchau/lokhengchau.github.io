@@ -17,8 +17,8 @@
       <pubDate>Sun, 13 May 2018 01:13:15 -0500</pubDate>
       
       <guid>/post/2018_05_13_seda_us_math/</guid>
-      <description>Using the data from SEDA, we can descriptively show the mathematics achievement outcomes of the US counties and how they compare among each other.
-Without too much technical details, each county is given an estimate of the average grade level of mathematics performance pooled across all students from grade 3 to 8 and from the years of 2009 to 2016. The estimates from all counties are then compared to see which were performing above or below average.</description>
+      <description>Using the data from Standord Educationa Data Archive (SEDA), we can descriptively show the mathematics achievement outcomes of the US counties and how they compare among each other.
+Each county is given an estimate of the average grade level of mathematics performance pooled across all students from grade 3 to 8 and from the years of 2009 to 2016. Since only students from grade 3 to 8 are included in the data, the estiamtes are scaled so that achievement on average is 5.</description>
     </item>
     
   </channel>
