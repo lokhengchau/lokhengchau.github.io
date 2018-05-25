@@ -25,7 +25,7 @@
 &lt;p&gt;The purpose of this post, and future posts related to #TidyTUesday, is to document my efforts in recreating/creating various charts using R. The goal, at least for myself, is to learn and use at least one new library or function in each week’s challenge. The codes presented and the charts created are not necessary the best, and all constructive criticisms are welcome.&lt;/p&gt;
 &lt;div id=&#34;dataset&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Dataset&lt;/h3&gt;
-&lt;p&gt;The original dataset contains the average college tuition cost, based on in-state tuition and fees for one year of full-time study at public four-year institutions, of every state (excluding DC) from the year of 2004 to 2016. Each row represents a state, and each column corresponds to an academic year. The first 5 rows of the dataset:&lt;/p&gt;
+&lt;p&gt;The original dataset contains the average college tuition cost, based on in-state tuition and fees for one year of full-time study at public four-year institutions, of every state (excluding DC) from the year of 2004 to 2016. Each row represents a state, and each column corresponds to an academic year. The first 5 rows and the first 5 columns of the dataset:&lt;/p&gt;
 &lt;table class=&#34;table&#34; style=&#34;margin-left: auto; margin-right: auto;&#34;&gt;
 &lt;thead&gt;
 &lt;tr&gt;
@@ -43,30 +43,6 @@ State
 &lt;/th&gt;
 &lt;th style=&#34;text-align:right;&#34;&gt;
 2007-08
-&lt;/th&gt;
-&lt;th style=&#34;text-align:right;&#34;&gt;
-2008-09
-&lt;/th&gt;
-&lt;th style=&#34;text-align:right;&#34;&gt;
-2009-10
-&lt;/th&gt;
-&lt;th style=&#34;text-align:right;&#34;&gt;
-2010-11
-&lt;/th&gt;
-&lt;th style=&#34;text-align:right;&#34;&gt;
-2011-12
-&lt;/th&gt;
-&lt;th style=&#34;text-align:right;&#34;&gt;
-2012-13
-&lt;/th&gt;
-&lt;th style=&#34;text-align:right;&#34;&gt;
-2013-14
-&lt;/th&gt;
-&lt;th style=&#34;text-align:right;&#34;&gt;
-2014-15
-&lt;/th&gt;
-&lt;th style=&#34;text-align:right;&#34;&gt;
-2015-16
 &lt;/th&gt;
 &lt;/tr&gt;
 &lt;/thead&gt;
@@ -87,30 +63,6 @@ Alabama
 &lt;td style=&#34;text-align:right;&#34;&gt;
 6008.169
 &lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-6475.092
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-7188.954
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-8071.134
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-8451.902
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-9098.069
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-9358.929
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-9496.084
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-9751.101
-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:left;&#34;&gt;
@@ -127,30 +79,6 @@ Alaska
 &lt;/td&gt;
 &lt;td style=&#34;text-align:right;&#34;&gt;
 5069.822
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-5075.482
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-5454.607
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-5759.153
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-5762.421
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-6026.143
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-6012.445
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-6148.808
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-6571.340
 &lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -169,30 +97,6 @@ Arizona
 &lt;td style=&#34;text-align:right;&#34;&gt;
 5681.638
 &lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-6058.464
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-7263.204
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-8839.605
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-9966.716
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-10133.503
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-10296.200
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-10413.844
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-10646.278
-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td style=&#34;text-align:left;&#34;&gt;
@@ -209,30 +113,6 @@ Arkansas
 &lt;/td&gt;
 &lt;td style=&#34;text-align:right;&#34;&gt;
 6414.900
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-6416.503
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-6627.092
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-6900.912
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-7028.991
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-7286.580
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-7408.495
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-7606.410
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-7867.297
 &lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -251,30 +131,6 @@ California
 &lt;td style=&#34;text-align:right;&#34;&gt;
 5672.472
 &lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-5897.888
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-7258.771
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-8193.739
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-9436.426
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-9360.574
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-9274.193
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-9186.824
-&lt;/td&gt;
-&lt;td style=&#34;text-align:right;&#34;&gt;
-9269.844
-&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -282,12 +138,14 @@ California
 &lt;p&gt;&lt;a href=&#34;../avg_us_tuition.png&#34;&gt;&lt;img src=&#34;../avg_us_tuition.png&#34; alt=&#34;US College Tuition&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;To make this chart, I need to manipulate and restructure my dataset. First, I need to calculate the average tuition of each year:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+
 df[51,2:13] &amp;lt;- sapply(df[2:13], mean)
 df[51,1] &amp;lt;- &amp;#39;Average&amp;#39;&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Next, I need to tidy my dataset so that one column represets the year, and one column represents the average tuition.&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- df %&amp;gt;% gather(key = &amp;#39;Year&amp;#39;, value = &amp;#39;State_avg&amp;#39;, 2:13)&lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Finally, I have to append a column that represents the national average cost of each year. I create a separate dataset that contains the national average tuition of each year, then merge with the original dataset by year.&lt;/p&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;avg &amp;lt;- filter(df, State == &amp;#39;Average&amp;#39;) %&amp;gt;% rename(National_avg = State_avg) %&amp;gt;%
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;avg &amp;lt;- filter(df, State == &amp;#39;Average&amp;#39;) %&amp;gt;%
+  rename(National_avg = State_avg) %&amp;gt;%
   select(-State)
 
 df &amp;lt;- left_join(df, avg, by = &amp;#39;Year&amp;#39;) %&amp;gt;% filter(State != &amp;#39;Average&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
@@ -505,7 +363,9 @@ p &amp;lt;- p + facet_geo(~State, grid = &amp;#39;us_state_grid3&amp;#39;)&lt;/c
 &lt;ol start=&#34;7&#34; style=&#34;list-style-type: decimal&#34;&gt;
 &lt;li&gt;Finally, customize the theme of the plot. The primary goal is to enlarge the font, and remove the plot borders and minor gridlines to increase data-ink ratio.&lt;/li&gt;
 &lt;/ol&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- p + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- p + theme(axis.text.x = element_text(angle = 90,
+                                          vjust = 0.5,
+                                          hjust=1),
         plot.background = element_rect(fill = &amp;quot;snow2&amp;quot;),
         legend.background = element_rect(fill = &amp;#39;snow2&amp;#39;),
         legend.key = element_rect(fill = &amp;#39;snow2&amp;#39;, color = &amp;#39;snow2&amp;#39;),

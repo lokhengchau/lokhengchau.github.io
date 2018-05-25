@@ -18,7 +18,7 @@ The purpose of this post, and future posts related to #TidyTUesday, is to docume
 
 ### Dataset
 
-The original dataset contains the average college tuition cost, based on in-state tuition and fees for one year of full-time study at public four-year institutions, of every state (excluding DC) from the year of 2004 to 2016. Each row represents a state, and each column corresponds to an academic year. The first 5 rows of the dataset:
+The original dataset contains the average college tuition cost, based on in-state tuition and fees for one year of full-time study at public four-year institutions, of every state (excluding DC) from the year of 2004 to 2016. Each row represents a state, and each column corresponds to an academic year. The first 5 rows and the first 5 columns of the dataset:
 
 ```{r include = FALSE}
 df <- readxl::read_xlsx('C:/Users/LokHeng/Desktop/Rstuff/US_avg_tuition/us_avg_tuition.xlsx')
@@ -29,7 +29,7 @@ library(geofacet)
 ```
 
 ```{r echo = FALSE}
-df %>%
+df[,1:5] %>%
   head(5) %>%
   kable() %>%
   kable_styling()
@@ -43,6 +43,7 @@ To make this chart, I need to manipulate and restructure my dataset. First, I ne
 
 ```{r warning = FALSE, message = FALSE}
 library(tidyverse)
+
 df[51,2:13] <- sapply(df[2:13], mean)
 df[51,1] <- 'Average'
 ```
@@ -56,7 +57,8 @@ df <- df %>% gather(key = 'Year', value = 'State_avg', 2:13)
 Finally, I have to append a column that represents the national average cost of each year. I create a separate dataset that contains the national average tuition of each year, then merge with the original dataset by year.
 
 ```{r warning = FALSE, message = FALSE}
-avg <- filter(df, State == 'Average') %>% rename(National_avg = State_avg) %>%
+avg <- filter(df, State == 'Average') %>%
+  rename(National_avg = State_avg) %>%
   select(-State)
 
 df <- left_join(df, avg, by = 'Year') %>% filter(State != 'Average')
@@ -136,7 +138,9 @@ p <- p +
 7. Finally, customize the theme of the plot. The primary goal is to enlarge the font, and remove the plot borders and minor gridlines to increase data-ink ratio.
 
 ```{r}
-p <- p + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+p <- p + theme(axis.text.x = element_text(angle = 90,
+                                          vjust = 0.5,
+                                          hjust=1),
         plot.background = element_rect(fill = "snow2"),
         legend.background = element_rect(fill = 'snow2'),
         legend.key = element_rect(fill = 'snow2', color = 'snow2'),

@@ -110,7 +110,7 @@
 <p>The purpose of this post, and future posts related to #TidyTUesday, is to document my efforts in recreating/creating various charts using R. The goal, at least for myself, is to learn and use at least one new library or function in each week’s challenge. The codes presented and the charts created are not necessary the best, and all constructive criticisms are welcome.</p>
 <div id="dataset" class="section level3">
 <h3>Dataset</h3>
-<p>The original dataset contains the average college tuition cost, based on in-state tuition and fees for one year of full-time study at public four-year institutions, of every state (excluding DC) from the year of 2004 to 2016. Each row represents a state, and each column corresponds to an academic year. The first 5 rows of the dataset:</p>
+<p>The original dataset contains the average college tuition cost, based on in-state tuition and fees for one year of full-time study at public four-year institutions, of every state (excluding DC) from the year of 2004 to 2016. Each row represents a state, and each column corresponds to an academic year. The first 5 rows and the first 5 columns of the dataset:</p>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <thead>
 <tr>
@@ -128,30 +128,6 @@ State
 </th>
 <th style="text-align:right;">
 2007-08
-</th>
-<th style="text-align:right;">
-2008-09
-</th>
-<th style="text-align:right;">
-2009-10
-</th>
-<th style="text-align:right;">
-2010-11
-</th>
-<th style="text-align:right;">
-2011-12
-</th>
-<th style="text-align:right;">
-2012-13
-</th>
-<th style="text-align:right;">
-2013-14
-</th>
-<th style="text-align:right;">
-2014-15
-</th>
-<th style="text-align:right;">
-2015-16
 </th>
 </tr>
 </thead>
@@ -172,30 +148,6 @@ Alabama
 <td style="text-align:right;">
 6008.169
 </td>
-<td style="text-align:right;">
-6475.092
-</td>
-<td style="text-align:right;">
-7188.954
-</td>
-<td style="text-align:right;">
-8071.134
-</td>
-<td style="text-align:right;">
-8451.902
-</td>
-<td style="text-align:right;">
-9098.069
-</td>
-<td style="text-align:right;">
-9358.929
-</td>
-<td style="text-align:right;">
-9496.084
-</td>
-<td style="text-align:right;">
-9751.101
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -212,30 +164,6 @@ Alaska
 </td>
 <td style="text-align:right;">
 5069.822
-</td>
-<td style="text-align:right;">
-5075.482
-</td>
-<td style="text-align:right;">
-5454.607
-</td>
-<td style="text-align:right;">
-5759.153
-</td>
-<td style="text-align:right;">
-5762.421
-</td>
-<td style="text-align:right;">
-6026.143
-</td>
-<td style="text-align:right;">
-6012.445
-</td>
-<td style="text-align:right;">
-6148.808
-</td>
-<td style="text-align:right;">
-6571.340
 </td>
 </tr>
 <tr>
@@ -254,30 +182,6 @@ Arizona
 <td style="text-align:right;">
 5681.638
 </td>
-<td style="text-align:right;">
-6058.464
-</td>
-<td style="text-align:right;">
-7263.204
-</td>
-<td style="text-align:right;">
-8839.605
-</td>
-<td style="text-align:right;">
-9966.716
-</td>
-<td style="text-align:right;">
-10133.503
-</td>
-<td style="text-align:right;">
-10296.200
-</td>
-<td style="text-align:right;">
-10413.844
-</td>
-<td style="text-align:right;">
-10646.278
-</td>
 </tr>
 <tr>
 <td style="text-align:left;">
@@ -294,30 +198,6 @@ Arkansas
 </td>
 <td style="text-align:right;">
 6414.900
-</td>
-<td style="text-align:right;">
-6416.503
-</td>
-<td style="text-align:right;">
-6627.092
-</td>
-<td style="text-align:right;">
-6900.912
-</td>
-<td style="text-align:right;">
-7028.991
-</td>
-<td style="text-align:right;">
-7286.580
-</td>
-<td style="text-align:right;">
-7408.495
-</td>
-<td style="text-align:right;">
-7606.410
-</td>
-<td style="text-align:right;">
-7867.297
 </td>
 </tr>
 <tr>
@@ -336,30 +216,6 @@ California
 <td style="text-align:right;">
 5672.472
 </td>
-<td style="text-align:right;">
-5897.888
-</td>
-<td style="text-align:right;">
-7258.771
-</td>
-<td style="text-align:right;">
-8193.739
-</td>
-<td style="text-align:right;">
-9436.426
-</td>
-<td style="text-align:right;">
-9360.574
-</td>
-<td style="text-align:right;">
-9274.193
-</td>
-<td style="text-align:right;">
-9186.824
-</td>
-<td style="text-align:right;">
-9269.844
-</td>
 </tr>
 </tbody>
 </table>
@@ -367,12 +223,14 @@ California
 <p><a href="../avg_us_tuition.png"><img src="../avg_us_tuition.png" alt="US College Tuition" /></a></p>
 <p>To make this chart, I need to manipulate and restructure my dataset. First, I need to calculate the average tuition of each year:</p>
 <pre class="r"><code>library(tidyverse)
+
 df[51,2:13] &lt;- sapply(df[2:13], mean)
 df[51,1] &lt;- &#39;Average&#39;</code></pre>
 <p>Next, I need to tidy my dataset so that one column represets the year, and one column represents the average tuition.</p>
 <pre class="r"><code>df &lt;- df %&gt;% gather(key = &#39;Year&#39;, value = &#39;State_avg&#39;, 2:13)</code></pre>
 <p>Finally, I have to append a column that represents the national average cost of each year. I create a separate dataset that contains the national average tuition of each year, then merge with the original dataset by year.</p>
-<pre class="r"><code>avg &lt;- filter(df, State == &#39;Average&#39;) %&gt;% rename(National_avg = State_avg) %&gt;%
+<pre class="r"><code>avg &lt;- filter(df, State == &#39;Average&#39;) %&gt;%
+  rename(National_avg = State_avg) %&gt;%
   select(-State)
 
 df &lt;- left_join(df, avg, by = &#39;Year&#39;) %&gt;% filter(State != &#39;Average&#39;)</code></pre>
@@ -590,7 +448,9 @@ p &lt;- p + facet_geo(~State, grid = &#39;us_state_grid3&#39;)</code></pre>
 <ol start="7" style="list-style-type: decimal">
 <li>Finally, customize the theme of the plot. The primary goal is to enlarge the font, and remove the plot borders and minor gridlines to increase data-ink ratio.</li>
 </ol>
-<pre class="r"><code>p &lt;- p + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+<pre class="r"><code>p &lt;- p + theme(axis.text.x = element_text(angle = 90,
+                                          vjust = 0.5,
+                                          hjust=1),
         plot.background = element_rect(fill = &quot;snow2&quot;),
         legend.background = element_rect(fill = &#39;snow2&#39;),
         legend.key = element_rect(fill = &#39;snow2&#39;, color = &#39;snow2&#39;),
