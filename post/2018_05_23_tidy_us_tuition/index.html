@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en-us">
+
+  <head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <title>
+    
+      #TidyTuesday Challenge Week 1 - US Tuition &middot; Lok H. Chau
+    
+  </title>
+
+  
+  <link rel="stylesheet" href="/css/poole.css">
+  <link rel="stylesheet" href="/css/syntax.css">
+  <link rel="stylesheet" href="/css/lanyon.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=PT+Serif:400,400italic,700|PT+Sans:400">
+
+  
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/assets/apple-touch-icon-144-precomposed.png">
+  <link rel="shortcut icon" href="/assets/favicon.ico">
+
+  
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+</head>
+
+
+  <body class = 'sidebar-overlay'>
+
+    
+<input type="checkbox" class="sidebar-checkbox" id="sidebar-checkbox" checked>
+
+
+<div class="sidebar" id="sidebar">
+  <div class="sidebar-item">
+    <p></p>
+  </div>
+
+  <nav class="sidebar-nav">
+    <a class="sidebar-nav-item " href="/">Home</a>
+	<a class="sidebar-nav-item " href="/about">About</a>
+    <a class="sidebar-nav-item " href="/post">Posts</a>
+
+    
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <span class="sidebar-nav-item">Currently on master</span>
+  </nav>
+
+  <div class="sidebar-item">
+    <p>&copy; 2018. All rights reserved.</p>
+  </div>
+</div>
+
+
+    
+    <div class="wrap">
+      <div class="masthead">
+        <div class="container">
+          <h3 class="masthead-title">
+            <a href="/" title="Home">Lok H. Chau</a>
+            <small></small>
+          </h3>
+        </div>
+      </div>
+
+      <div class="container content">
+
+
+<div class="post">
+  <h1 class="post-title">#TidyTuesday Challenge Week 1 - US Tuition</h1>
+  <span class="post-date">May 13 2018</span>
+  <script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
+
+
+<p>
+#TidyTuesday is a weekly data project aimed at the R ecosystem. A dataset is released each week on Tuesday, and those who are interested are challenged to recreate the original charts, improve upon the orignal charts, or create totally different charts with <code>ggplot2</code>, <code>tidyr</code>, <code>dplyr</code>, and other libraries in R.
+</p>
+<p>The purpose of this post, and future posts related to #TidyTUesday, is to document my efforts in recreating/creating various charts using R. The goal, at least for myself, is to learn and use at least one new library or function in each week’s challenge. The codes presented and the charts created are not necessary the best, and all constructive criticisms are welcome.</p>
+<div id="dataset" class="section level3">
+<h3>Dataset</h3>
+<p>The original dataset contains the average college tuition cost, based on in-state tuition and fees for one year of full-time study at public four-year institutions, of every state (excluding DC) from the year of 2004 to 2016. Each row represents a state, and each column corresponds to an academic year. The first 5 rows of the dataset:</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+State
+</th>
+<th style="text-align:right;">
+2004-05
+</th>
+<th style="text-align:right;">
+2005-06
+</th>
+<th style="text-align:right;">
+2006-07
+</th>
+<th style="text-align:right;">
+2007-08
+</th>
+<th style="text-align:right;">
+2008-09
+</th>
+<th style="text-align:right;">
+2009-10
+</th>
+<th style="text-align:right;">
+2010-11
+</th>
+<th style="text-align:right;">
+2011-12
+</th>
+<th style="text-align:right;">
+2012-13
+</th>
+<th style="text-align:right;">
+2013-14
+</th>
+<th style="text-align:right;">
+2014-15
+</th>
+<th style="text-align:right;">
+2015-16
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Alabama
+</td>
+<td style="text-align:right;">
+5682.838
+</td>
+<td style="text-align:right;">
+5840.550
+</td>
+<td style="text-align:right;">
+5753.496
+</td>
+<td style="text-align:right;">
+6008.169
+</td>
+<td style="text-align:right;">
+6475.092
+</td>
+<td style="text-align:right;">
+7188.954
+</td>
+<td style="text-align:right;">
+8071.134
+</td>
+<td style="text-align:right;">
+8451.902
+</td>
+<td style="text-align:right;">
+9098.069
+</td>
+<td style="text-align:right;">
+9358.929
+</td>
+<td style="text-align:right;">
+9496.084
+</td>
+<td style="text-align:right;">
+9751.101
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Alaska
+</td>
+<td style="text-align:right;">
+4328.281
+</td>
+<td style="text-align:right;">
+4632.623
+</td>
+<td style="text-align:right;">
+4918.501
+</td>
+<td style="text-align:right;">
+5069.822
+</td>
+<td style="text-align:right;">
+5075.482
+</td>
+<td style="text-align:right;">
+5454.607
+</td>
+<td style="text-align:right;">
+5759.153
+</td>
+<td style="text-align:right;">
+5762.421
+</td>
+<td style="text-align:right;">
+6026.143
+</td>
+<td style="text-align:right;">
+6012.445
+</td>
+<td style="text-align:right;">
+6148.808
+</td>
+<td style="text-align:right;">
+6571.340
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Arizona
+</td>
+<td style="text-align:right;">
+5138.495
+</td>
+<td style="text-align:right;">
+5415.516
+</td>
+<td style="text-align:right;">
+5481.419
+</td>
+<td style="text-align:right;">
+5681.638
+</td>
+<td style="text-align:right;">
+6058.464
+</td>
+<td style="text-align:right;">
+7263.204
+</td>
+<td style="text-align:right;">
+8839.605
+</td>
+<td style="text-align:right;">
+9966.716
+</td>
+<td style="text-align:right;">
+10133.503
+</td>
+<td style="text-align:right;">
+10296.200
+</td>
+<td style="text-align:right;">
+10413.844
+</td>
+<td style="text-align:right;">
+10646.278
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Arkansas
+</td>
+<td style="text-align:right;">
+5772.302
+</td>
+<td style="text-align:right;">
+6082.379
+</td>
+<td style="text-align:right;">
+6231.977
+</td>
+<td style="text-align:right;">
+6414.900
+</td>
+<td style="text-align:right;">
+6416.503
+</td>
+<td style="text-align:right;">
+6627.092
+</td>
+<td style="text-align:right;">
+6900.912
+</td>
+<td style="text-align:right;">
+7028.991
+</td>
+<td style="text-align:right;">
+7286.580
+</td>
+<td style="text-align:right;">
+7408.495
+</td>
+<td style="text-align:right;">
+7606.410
+</td>
+<td style="text-align:right;">
+7867.297
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+California
+</td>
+<td style="text-align:right;">
+5285.921
+</td>
+<td style="text-align:right;">
+5527.881
+</td>
+<td style="text-align:right;">
+5334.826
+</td>
+<td style="text-align:right;">
+5672.472
+</td>
+<td style="text-align:right;">
+5897.888
+</td>
+<td style="text-align:right;">
+7258.771
+</td>
+<td style="text-align:right;">
+8193.739
+</td>
+<td style="text-align:right;">
+9436.426
+</td>
+<td style="text-align:right;">
+9360.574
+</td>
+<td style="text-align:right;">
+9274.193
+</td>
+<td style="text-align:right;">
+9186.824
+</td>
+<td style="text-align:right;">
+9269.844
+</td>
+</tr>
+</tbody>
+</table>
+<p>There are certainly many possibilities to go about how to visualize the data. My idea is to compare and contrast the trend of increase (or decrease) in college tuition of each state with the national average to see which states are relatively more or less expensive. Here is my final chart for this data set:</p>
+<p><a href="avg_us_tuition.png"><img src="avg_us_tuition.png" alt="US College Tuition" /></a></p>
+<p>To make this chart, I need to manipulate and restructure my dataset. First, I need to calculate the average tuition of each year:</p>
+<pre class="r"><code>library(tidyverse)
+df[51,2:13] &lt;- sapply(df[2:13], mean)
+df[51,1] &lt;- &#39;Average&#39;</code></pre>
+<p>Next, I need to tidy my dataset so that one column represets the year, and one column represents the average tuition.</p>
+<pre class="r"><code>df &lt;- df %&gt;% gather(key = &#39;Year&#39;, value = &#39;State_avg&#39;, 2:13)</code></pre>
+<p>Finally, I have to append a column that represents the national average cost of each year. I create a separate dataset that contains the national average tuition of each year, then merge with the original dataset by year.</p>
+<pre class="r"><code>avg &lt;- filter(df, State == &#39;Average&#39;) %&gt;% rename(National_avg = State_avg) %&gt;%
+  select(-State)
+
+df &lt;- left_join(df, avg, by = &#39;Year&#39;) %&gt;% filter(State != &#39;Average&#39;)</code></pre>
+<p>The cleaned up, final dataset is shown below:</p>
+<table class="table" style="margin-left: auto; margin-right: auto;">
+<thead>
+<tr>
+<th style="text-align:left;">
+State
+</th>
+<th style="text-align:left;">
+Year
+</th>
+<th style="text-align:right;">
+State_avg
+</th>
+<th style="text-align:right;">
+National_avg
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Alabama
+</td>
+<td style="text-align:left;">
+2004-05
+</td>
+<td style="text-align:right;">
+5682.838
+</td>
+<td style="text-align:right;">
+6409.564
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Alaska
+</td>
+<td style="text-align:left;">
+2004-05
+</td>
+<td style="text-align:right;">
+4328.281
+</td>
+<td style="text-align:right;">
+6409.564
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Arizona
+</td>
+<td style="text-align:left;">
+2004-05
+</td>
+<td style="text-align:right;">
+5138.495
+</td>
+<td style="text-align:right;">
+6409.564
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Arkansas
+</td>
+<td style="text-align:left;">
+2004-05
+</td>
+<td style="text-align:right;">
+5772.302
+</td>
+<td style="text-align:right;">
+6409.564
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+California
+</td>
+<td style="text-align:left;">
+2004-05
+</td>
+<td style="text-align:right;">
+5285.921
+</td>
+<td style="text-align:right;">
+6409.564
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Colorado
+</td>
+<td style="text-align:left;">
+2004-05
+</td>
+<td style="text-align:right;">
+4703.777
+</td>
+<td style="text-align:right;">
+6409.564
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Connecticut
+</td>
+<td style="text-align:left;">
+2004-05
+</td>
+<td style="text-align:right;">
+7983.695
+</td>
+<td style="text-align:right;">
+6409.564
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Delaware
+</td>
+<td style="text-align:left;">
+2004-05
+</td>
+<td style="text-align:right;">
+8352.890
+</td>
+<td style="text-align:right;">
+6409.564
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Florida
+</td>
+<td style="text-align:left;">
+2004-05
+</td>
+<td style="text-align:right;">
+3848.201
+</td>
+<td style="text-align:right;">
+6409.564
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Georgia
+</td>
+<td style="text-align:left;">
+2004-05
+</td>
+<td style="text-align:right;">
+4298.040
+</td>
+<td style="text-align:right;">
+6409.564
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="code-for-the-graph" class="section level3">
+<h3>Code for the graph</h3>
+<p>Let’s break down the R codes for the chart step by step:</p>
+<ol style="list-style-type: decimal">
+<li>Create the trend lines for state average tuition and national average tuition.</li>
+</ol>
+<pre class="r"><code>p &lt;- ggplot(df) +
+  geom_path(aes(x = Year, y = State_avg, group = 1, linetype = &#39;a&#39;), size = 1.5) +
+  geom_path(aes(x = Year, y = National_avg, group = 1, linetype = &#39;c&#39;), size = 1.5)</code></pre>
+<ol start="2" style="list-style-type: decimal">
+<li>Fill the area between the state’s average tuition and national average tuition with different colors to indicate less or more expensive, comparatively to national average.</li>
+</ol>
+<pre class="r"><code>p &lt;- p +
+  geom_ribbon(aes(x = Year, ymin = National_avg,
+                  ymax = ifelse(State_avg &gt;= National_avg, State_avg, National_avg),
+                  group = 1, fill = &#39;blue&#39;)) + 
+  geom_ribbon(aes(x = Year, ymin = State_avg,
+                  ymax = ifelse(National_avg &gt;= State_avg, National_avg, State_avg),
+                  group = 1, fill = &#39;red&#39;))</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Facet the plots by states, and also arrange and display them according to geographic locations by using the library <code>geofacet</code>. By default, the function <code>facet_geo</code> uses the grid layout <code>us_state_grid1</code>, which also includes the geographic location of DC. Since our data does not include DC, we need to use the grid layout <code>us_state_grid3</code> instead.</li>
+</ol>
+<pre class="r"><code>library(geofacet)
+p &lt;- p + facet_geo(~State, grid = &#39;us_state_grid3&#39;)</code></pre>
+<ol start="4" style="list-style-type: decimal">
+<li>Customize the axis labels. Including only the labels for first and the last academic years in x axis, and change the display format to currency in y axis.</li>
+</ol>
+<pre class="r"><code>p &lt;- p +
+  scale_x_discrete(breaks = c(&#39;2004-05&#39;, &#39;2015-16&#39;),
+                   labels = c(&#39;04-05&#39;,  &#39;15-16&#39;)) +
+  scale_y_continuous(labels = dollar)</code></pre>
+<ol start="5" style="list-style-type: decimal">
+<li>Rename legend labels.</li>
+</ol>
+<pre class="r"><code>p &lt;- p +
+  scale_linetype_discrete(labels = c(&#39;State&#39;,&#39;National&#39;)) +
+  scale_fill_hue(labels = c(&#39;More expensive&#39;,
+                            &#39;Less expensive&#39;))</code></pre>
+<ol start="6" style="list-style-type: decimal">
+<li>Include/Rename plot title, legend title, and axis labels.</li>
+</ol>
+<pre class="r"><code>p &lt;- p +
+  labs(fill = &#39;Comparing to National Average&#39;,
+       linetype = &#39;Average Tuition&#39;,
+       y = &#39;Average Tuition&#39;,
+       x = &#39;Year&#39;,
+       title = &#39;Average College Tuition in the States&#39;,
+       subtitle = &#39;From Year 2005 to 2016&#39;,
+       caption = &#39;Source: 1) onlinembapage.com 2) github.com/rfordatascience/tidytuesday&#39;)</code></pre>
+<ol start="7" style="list-style-type: decimal">
+<li>Finally, customize the theme of the plot. The primary goal is to enlarge the font, and remove the plot borders and minor gridlines to increase data-ink ratio.</li>
+</ol>
+<pre class="r"><code>p &lt;- p + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+        plot.background = element_rect(fill = &quot;snow2&quot;),
+        legend.background = element_rect(fill = &#39;snow2&#39;),
+        legend.key = element_rect(fill = &#39;snow2&#39;, color = &#39;snow2&#39;),
+        panel.grid.major = element_line(colour = &#39;grey80&#39;),
+        panel.grid.minor = element_blank(),
+        panel.background = element_rect(fill = &quot;snow2&quot;),
+        panel.border = element_blank(),
+        plot.title = element_text(size = rel(2)),
+        plot.subtitle = element_text(size = rel(1.5)),
+        axis.title = element_text(size = rel(1.3)),
+        legend.title = element_text(size = rel(1.3)))</code></pre>
+<p>Done.</p>
+</div>
+<div id="links" class="section level3">
+<h3>Links</h3>
+<ul>
+<li>Vignette of <code>geofacet</code> - <a href="https://hafen.github.io/geofacet/" class="uri">https://hafen.github.io/geofacet/</a></li>
+<li>Github page of #TidyTuesday - <a href="https://github.com/rfordatascience/tidytuesday" class="uri">https://github.com/rfordatascience/tidytuesday</a></li>
+</ul>
+</div>
+
+</div>
+
+      </div>
+    </div>
+
+    <label for="sidebar-checkbox" class="sidebar-toggle"></label>
+
+  </body>
+</html>
+

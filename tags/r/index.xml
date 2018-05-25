@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on My New Hugo Site</title>
-    <link>/post/</link>
-    <description>Recent content in Posts on My New Hugo Site</description>
+    <title>R on My New Hugo Site</title>
+    <link>/tags/r/</link>
+    <description>Recent content in R on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 13 May 2018 01:13:15 -0500</lastBuildDate>
     
-	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/r/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
@@ -18,16 +18,6 @@
       
       <guid>/post/2018_05_23_tidy_us_tuition/</guid>
       <description>#TidyTuesday is a weekly data project aimed at the R ecosystem. A dataset is released each week on Tuesday, and those who are interested are challenged to recreate the original charts, improve upon the orignal charts, or create totally different charts with ggplot2, tidyr, dplyr, and other libraries in R.The purpose of this post, and future posts related to #TidyTUesday, is to document my efforts in recreating/creating various charts using R.</description>
-    </item>
-    
-    <item>
-      <title>Average Mathematics Achievement by US Counties From Year of 2009 - 2016</title>
-      <link>/post/2018_05_13_seda_us_math/</link>
-      <pubDate>Sun, 13 May 2018 01:13:15 -0500</pubDate>
-      
-      <guid>/post/2018_05_13_seda_us_math/</guid>
-      <description>Using the data from Standord Educationa Data Archive (SEDA), we can descriptively show the mathematics achievement outcomes of the US counties and how they compare among each other.
-Each county is given an estimate of the average grade level of mathematics performance pooled across all students from grade 3 to 8 and from the years of 2009 to 2016. Since only students from grade 3 to 8 are included in the data, the estiamtes are scaled so that achievement on average is 5.</description>
     </item>
     
   </channel>

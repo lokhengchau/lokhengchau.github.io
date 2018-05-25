@@ -11,6 +11,527 @@
     
       
         <item>
+          <title>#TidyTuesday Challenge Week 1 - US Tuition</title>
+          <link>/post/2018_05_23_tidy_us_tuition/</link>
+          <pubDate>Sun, 13 May 2018 01:13:15 -0500</pubDate>
+          <author>Lok H. Chau</author>
+          <guid>/post/2018_05_23_tidy_us_tuition/</guid>
+          <description>&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
+
+
+&lt;p&gt;
+#TidyTuesday is a weekly data project aimed at the R ecosystem. A dataset is released each week on Tuesday, and those who are interested are challenged to recreate the original charts, improve upon the orignal charts, or create totally different charts with &lt;code&gt;ggplot2&lt;/code&gt;, &lt;code&gt;tidyr&lt;/code&gt;, &lt;code&gt;dplyr&lt;/code&gt;, and other libraries in R.
+&lt;/p&gt;
+&lt;p&gt;The purpose of this post, and future posts related to #TidyTUesday, is to document my efforts in recreating/creating various charts using R. The goal, at least for myself, is to learn and use at least one new library or function in each week’s challenge. The codes presented and the charts created are not necessary the best, and all constructive criticisms are welcome.&lt;/p&gt;
+&lt;div id=&#34;dataset&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Dataset&lt;/h3&gt;
+&lt;p&gt;The original dataset contains the average college tuition cost, based on in-state tuition and fees for one year of full-time study at public four-year institutions, of every state (excluding DC) from the year of 2004 to 2016. Each row represents a state, and each column corresponds to an academic year. The first 5 rows of the dataset:&lt;/p&gt;
+&lt;table class=&#34;table&#34; style=&#34;margin-left: auto; margin-right: auto;&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+State
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+2004-05
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+2005-06
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+2006-07
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+2007-08
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+2008-09
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+2009-10
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+2010-11
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+2011-12
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+2012-13
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+2013-14
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+2014-15
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+2015-16
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Alabama
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5682.838
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5840.550
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5753.496
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6008.169
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6475.092
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7188.954
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8071.134
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8451.902
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9098.069
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9358.929
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9496.084
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9751.101
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Alaska
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4328.281
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4632.623
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4918.501
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5069.822
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5075.482
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5454.607
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5759.153
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5762.421
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6026.143
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6012.445
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6148.808
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6571.340
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Arizona
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5138.495
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5415.516
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5481.419
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5681.638
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6058.464
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7263.204
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8839.605
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9966.716
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10133.503
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10296.200
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10413.844
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+10646.278
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Arkansas
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5772.302
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6082.379
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6231.977
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6414.900
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6416.503
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6627.092
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6900.912
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7028.991
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7286.580
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7408.495
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7606.410
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7867.297
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+California
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5285.921
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5527.881
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5334.826
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5672.472
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5897.888
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7258.771
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8193.739
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9436.426
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9360.574
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9274.193
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9186.824
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+9269.844
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;There are certainly many possibilities to go about how to visualize the data. My idea is to compare and contrast the trend of increase (or decrease) in college tuition of each state with the national average to see which states are relatively more or less expensive. Here is my final chart for this data set:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;avg_us_tuition.png&#34;&gt;&lt;img src=&#34;avg_us_tuition.png&#34; alt=&#34;US College Tuition&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;To make this chart, I need to manipulate and restructure my dataset. First, I need to calculate the average tuition of each year:&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
+df[51,2:13] &amp;lt;- sapply(df[2:13], mean)
+df[51,1] &amp;lt;- &amp;#39;Average&amp;#39;&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next, I need to tidy my dataset so that one column represets the year, and one column represents the average tuition.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;df &amp;lt;- df %&amp;gt;% gather(key = &amp;#39;Year&amp;#39;, value = &amp;#39;State_avg&amp;#39;, 2:13)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Finally, I have to append a column that represents the national average cost of each year. I create a separate dataset that contains the national average tuition of each year, then merge with the original dataset by year.&lt;/p&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;avg &amp;lt;- filter(df, State == &amp;#39;Average&amp;#39;) %&amp;gt;% rename(National_avg = State_avg) %&amp;gt;%
+  select(-State)
+
+df &amp;lt;- left_join(df, avg, by = &amp;#39;Year&amp;#39;) %&amp;gt;% filter(State != &amp;#39;Average&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The cleaned up, final dataset is shown below:&lt;/p&gt;
+&lt;table class=&#34;table&#34; style=&#34;margin-left: auto; margin-right: auto;&#34;&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+State
+&lt;/th&gt;
+&lt;th style=&#34;text-align:left;&#34;&gt;
+Year
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+State_avg
+&lt;/th&gt;
+&lt;th style=&#34;text-align:right;&#34;&gt;
+National_avg
+&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Alabama
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2004-05
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5682.838
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6409.564
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Alaska
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2004-05
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4328.281
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6409.564
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Arizona
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2004-05
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5138.495
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6409.564
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Arkansas
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2004-05
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5772.302
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6409.564
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+California
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2004-05
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+5285.921
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6409.564
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Colorado
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2004-05
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4703.777
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6409.564
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Connecticut
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2004-05
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+7983.695
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6409.564
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Delaware
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2004-05
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+8352.890
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6409.564
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Florida
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2004-05
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+3848.201
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6409.564
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+Georgia
+&lt;/td&gt;
+&lt;td style=&#34;text-align:left;&#34;&gt;
+2004-05
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+4298.040
+&lt;/td&gt;
+&lt;td style=&#34;text-align:right;&#34;&gt;
+6409.564
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;div id=&#34;code-for-the-graph&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Code for the graph&lt;/h3&gt;
+&lt;p&gt;Let’s break down the R codes for the chart step by step:&lt;/p&gt;
+&lt;ol style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Create the trend lines for state average tuition and national average tuition.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- ggplot(df) +
+  geom_path(aes(x = Year, y = State_avg, group = 1, linetype = &amp;#39;a&amp;#39;), size = 1.5) +
+  geom_path(aes(x = Year, y = National_avg, group = 1, linetype = &amp;#39;c&amp;#39;), size = 1.5)&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;2&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Fill the area between the state’s average tuition and national average tuition with different colors to indicate less or more expensive, comparatively to national average.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- p +
+  geom_ribbon(aes(x = Year, ymin = National_avg,
+                  ymax = ifelse(State_avg &amp;gt;= National_avg, State_avg, National_avg),
+                  group = 1, fill = &amp;#39;blue&amp;#39;)) + 
+  geom_ribbon(aes(x = Year, ymin = State_avg,
+                  ymax = ifelse(National_avg &amp;gt;= State_avg, National_avg, State_avg),
+                  group = 1, fill = &amp;#39;red&amp;#39;))&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;3&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Facet the plots by states, and also arrange and display them according to geographic locations by using the library &lt;code&gt;geofacet&lt;/code&gt;. By default, the function &lt;code&gt;facet_geo&lt;/code&gt; uses the grid layout &lt;code&gt;us_state_grid1&lt;/code&gt;, which also includes the geographic location of DC. Since our data does not include DC, we need to use the grid layout &lt;code&gt;us_state_grid3&lt;/code&gt; instead.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(geofacet)
+p &amp;lt;- p + facet_geo(~State, grid = &amp;#39;us_state_grid3&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;4&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Customize the axis labels. Including only the labels for first and the last academic years in x axis, and change the display format to currency in y axis.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- p +
+  scale_x_discrete(breaks = c(&amp;#39;2004-05&amp;#39;, &amp;#39;2015-16&amp;#39;),
+                   labels = c(&amp;#39;04-05&amp;#39;,  &amp;#39;15-16&amp;#39;)) +
+  scale_y_continuous(labels = dollar)&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;5&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Rename legend labels.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- p +
+  scale_linetype_discrete(labels = c(&amp;#39;State&amp;#39;,&amp;#39;National&amp;#39;)) +
+  scale_fill_hue(labels = c(&amp;#39;More expensive&amp;#39;,
+                            &amp;#39;Less expensive&amp;#39;))&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;6&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Include/Rename plot title, legend title, and axis labels.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- p +
+  labs(fill = &amp;#39;Comparing to National Average&amp;#39;,
+       linetype = &amp;#39;Average Tuition&amp;#39;,
+       y = &amp;#39;Average Tuition&amp;#39;,
+       x = &amp;#39;Year&amp;#39;,
+       title = &amp;#39;Average College Tuition in the States&amp;#39;,
+       subtitle = &amp;#39;From Year 2005 to 2016&amp;#39;,
+       caption = &amp;#39;Source: 1) onlinembapage.com 2) github.com/rfordatascience/tidytuesday&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
+&lt;ol start=&#34;7&#34; style=&#34;list-style-type: decimal&#34;&gt;
+&lt;li&gt;Finally, customize the theme of the plot. The primary goal is to enlarge the font, and remove the plot borders and minor gridlines to increase data-ink ratio.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- p + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+        plot.background = element_rect(fill = &amp;quot;snow2&amp;quot;),
+        legend.background = element_rect(fill = &amp;#39;snow2&amp;#39;),
+        legend.key = element_rect(fill = &amp;#39;snow2&amp;#39;, color = &amp;#39;snow2&amp;#39;),
+        panel.grid.major = element_line(colour = &amp;#39;grey80&amp;#39;),
+        panel.grid.minor = element_blank(),
+        panel.background = element_rect(fill = &amp;quot;snow2&amp;quot;),
+        panel.border = element_blank(),
+        plot.title = element_text(size = rel(2)),
+        plot.subtitle = element_text(size = rel(1.5)),
+        axis.title = element_text(size = rel(1.3)),
+        legend.title = element_text(size = rel(1.3)))&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Done.&lt;/p&gt;
+&lt;/div&gt;
+&lt;div id=&#34;links&#34; class=&#34;section level3&#34;&gt;
+&lt;h3&gt;Links&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Vignette of &lt;code&gt;geofacet&lt;/code&gt; - &lt;a href=&#34;https://hafen.github.io/geofacet/&#34; class=&#34;uri&#34;&gt;https://hafen.github.io/geofacet/&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Github page of #TidyTuesday - &lt;a href=&#34;https://github.com/rfordatascience/tidytuesday&#34; class=&#34;uri&#34;&gt;https://github.com/rfordatascience/tidytuesday&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+</description>
+        </item>
+      
+    
+      
+        <item>
           <title>Average Mathematics Achievement by US Counties From Year of 2009 - 2016</title>
           <link>/post/2018_05_13_seda_us_math/</link>
           <pubDate>Sun, 13 May 2018 01:13:15 -0500</pubDate>

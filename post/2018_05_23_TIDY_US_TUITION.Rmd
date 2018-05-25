@@ -1,0 +1,158 @@
+---
+title: "#TidyTuesday Challenge Week 1 - US Tuition"
+author: "Lok H. Chau"
+date: 2018-05-13T1:13:15-05:00
+categories: ["R"]
+tags: ["R", "ggplot2", "visualization", "geofacet"]
+output: html_document
+---
+```{r setup, include=FALSE}
+library(knitr)
+library(kableExtra)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+<p>#TidyTuesday is a weekly data project aimed at the R ecosystem. A dataset is released each week on Tuesday, and those who are interested are challenged to recreate the original charts, improve upon the orignal charts, or create totally different charts with `ggplot2`, `tidyr`, `dplyr`, and other libraries in R.</p>
+
+The purpose of this post, and future posts related to #TidyTUesday, is to document my efforts in recreating/creating various charts using R. The goal, at least for myself, is to learn and use at least one new library or function in each week's challenge. The codes presented and the charts created are not necessary the best, and all constructive criticisms are welcome.
+
+### Dataset
+
+The original dataset contains the average college tuition cost, based on in-state tuition and fees for one year of full-time study at public four-year institutions, of every state (excluding DC) from the year of 2004 to 2016. Each row represents a state, and each column corresponds to an academic year. The first 5 rows of the dataset:
+
+```{r include = FALSE}
+df <- readxl::read_xlsx('C:/Users/LokHeng/Desktop/Rstuff/US_avg_tuition/us_avg_tuition.xlsx')
+
+library(tidyverse)
+library(scales)
+library(geofacet)
+```
+
+```{r echo = FALSE}
+df %>%
+  head(5) %>%
+  kable() %>%
+  kable_styling()
+```
+
+There are certainly many possibilities to go about how to visualize the data. My idea is to compare and contrast the trend of increase (or decrease) in college tuition of each state with the national average to see which states are relatively more or less expensive. Here is my final chart for this data set:
+
+[![US College Tuition](avg_us_tuition.png)](avg_us_tuition.png)
+
+To make this chart, I need to manipulate and restructure my dataset. First, I need to calculate the average tuition of each year:
+
+```{r warning = FALSE, message = FALSE}
+library(tidyverse)
+df[51,2:13] <- sapply(df[2:13], mean)
+df[51,1] <- 'Average'
+```
+
+Next, I need to tidy my dataset so that one column represets the year, and one column represents the average tuition.
+
+```{r warning = FALSE, message = FALSE}
+df <- df %>% gather(key = 'Year', value = 'State_avg', 2:13)
+```
+
+Finally, I have to append a column that represents the national average cost of each year. I create a separate dataset that contains the national average tuition of each year, then merge with the original dataset by year.
+
+```{r warning = FALSE, message = FALSE}
+avg <- filter(df, State == 'Average') %>% rename(National_avg = State_avg) %>%
+  select(-State)
+
+df <- left_join(df, avg, by = 'Year') %>% filter(State != 'Average')
+```
+
+The cleaned up, final dataset is shown below:
+
+```{r echo = FALSE}
+df %>%
+  head(10) %>%
+  kable() %>%
+  kable_styling()
+```
+
+### Code for the graph
+
+Let's break down the R codes for the chart step by step:
+
+1. Create the trend lines for state average tuition and national average tuition.
+
+```{r}
+p <- ggplot(df) +
+  geom_path(aes(x = Year, y = State_avg, group = 1, linetype = 'a'), size = 1.5) +
+  geom_path(aes(x = Year, y = National_avg, group = 1, linetype = 'c'), size = 1.5)
+```
+
+2. Fill the area between the state's average tuition and national average tuition with different colors to indicate less or more expensive, comparatively to national average.
+
+```{r}
+p <- p +
+  geom_ribbon(aes(x = Year, ymin = National_avg,
+                  ymax = ifelse(State_avg >= National_avg, State_avg, National_avg),
+                  group = 1, fill = 'blue')) + 
+  geom_ribbon(aes(x = Year, ymin = State_avg,
+                  ymax = ifelse(National_avg >= State_avg, National_avg, State_avg),
+                  group = 1, fill = 'red'))
+```
+
+3. Facet the plots by states, and also arrange and display them according to geographic locations by using the library `geofacet`. By default, the function `facet_geo` uses the grid layout `us_state_grid1`, which also includes the geographic location of DC. Since our data does not include DC, we need to use the grid layout `us_state_grid3` instead.
+
+```{r }
+library(geofacet)
+p <- p + facet_geo(~State, grid = 'us_state_grid3')
+```
+
+4. Customize the axis labels. Including only the labels for first and the last academic years in x axis, and change the display format to currency in y axis.
+
+```{r}
+p <- p +
+  scale_x_discrete(breaks = c('2004-05', '2015-16'),
+                   labels = c('04-05',  '15-16')) +
+  scale_y_continuous(labels = dollar)
+```
+
+5. Rename legend labels.
+
+```{r}
+p <- p +
+  scale_linetype_discrete(labels = c('State','National')) +
+  scale_fill_hue(labels = c('More expensive',
+                            'Less expensive'))
+```
+
+6. Include/Rename plot title, legend title, and axis labels.
+
+```{r}
+p <- p +
+  labs(fill = 'Comparing to National Average',
+       linetype = 'Average Tuition',
+       y = 'Average Tuition',
+       x = 'Year',
+       title = 'Average College Tuition in the States',
+       subtitle = 'From Year 2005 to 2016',
+       caption = 'Source: 1) onlinembapage.com 2) github.com/rfordatascience/tidytuesday')
+```
+
+7. Finally, customize the theme of the plot. The primary goal is to enlarge the font, and remove the plot borders and minor gridlines to increase data-ink ratio.
+
+```{r}
+p <- p + theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1),
+        plot.background = element_rect(fill = "snow2"),
+        legend.background = element_rect(fill = 'snow2'),
+        legend.key = element_rect(fill = 'snow2', color = 'snow2'),
+        panel.grid.major = element_line(colour = 'grey80'),
+        panel.grid.minor = element_blank(),
+        panel.background = element_rect(fill = "snow2"),
+        panel.border = element_blank(),
+        plot.title = element_text(size = rel(2)),
+        plot.subtitle = element_text(size = rel(1.5)),
+        axis.title = element_text(size = rel(1.3)),
+        legend.title = element_text(size = rel(1.3)))
+```
+
+Done.
+
+### Links
+
+- Vignette of `geofacet` - [https://hafen.github.io/geofacet/](https://hafen.github.io/geofacet/)
+- Github page of #TidyTuesday - [https://github.com/rfordatascience/tidytuesday](https://github.com/rfordatascience/tidytuesday)
