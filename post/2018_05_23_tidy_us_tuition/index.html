@@ -107,7 +107,7 @@
 <p>
 #TidyTuesday is a weekly data project aimed at the R ecosystem. A dataset is released each week on Tuesday, and those who are interested are challenged to recreate the original charts, improve upon the orignal charts, or create totally different charts with <code>ggplot2</code>, <code>tidyr</code>, <code>dplyr</code>, and other libraries in R.
 </p>
-<p>The purpose of this post, and future posts related to #TidyTUesday, is to document my efforts in recreating/creating various charts using R. The goal, at least for myself, is to learn and use at least one new library or function in each week’s challenge. The codes presented and the charts created are not necessary the best, and all constructive criticisms are welcome.</p>
+<p>The purpose of this post, and future posts related to #TidyTuesday, is to document my efforts in recreating/creating various charts using R. The goal, at least for myself, is to learn and use at least one new library or function in each week’s challenge. The codes presented and the charts created are not necessary the best, and all constructive criticisms are welcome.</p>
 <div id="dataset" class="section level3">
 <h3>Dataset</h3>
 <p>The original dataset contains the average college tuition cost, based on in-state tuition and fees for one year of full-time study at public four-year institutions, of every state (excluding DC) from the year of 2004 to 2016. Each row represents a state, and each column corresponds to an academic year. The first 5 rows and the first 5 columns of the dataset:</p>
@@ -419,11 +419,14 @@ Georgia
 <li>Facet the plots by states, and also arrange and display them according to geographic locations by using the library <code>geofacet</code>. By default, the function <code>facet_geo</code> uses the grid layout <code>us_state_grid1</code>, which also includes the geographic location of DC. Since our data does not include DC, we need to use the grid layout <code>us_state_grid3</code> instead.</li>
 </ol>
 <pre class="r"><code>library(geofacet)
+
 p &lt;- p + facet_geo(~State, grid = &#39;us_state_grid3&#39;)</code></pre>
 <ol start="4" style="list-style-type: decimal">
-<li>Customize the axis labels. Including only the labels for first and the last academic years in x axis, and change the display format to currency in y axis.</li>
+<li>Customize the axis labels. Including only the labels for first and the last academic years in x axis, and change the display format to currency in y axis (requires the library <code>scales</code>).</li>
 </ol>
-<pre class="r"><code>p &lt;- p +
+<pre class="r"><code>library(scales)
+
+p &lt;- p +
   scale_x_discrete(breaks = c(&#39;2004-05&#39;, &#39;2015-16&#39;),
                    labels = c(&#39;04-05&#39;,  &#39;15-16&#39;)) +
   scale_y_continuous(labels = dollar)</code></pre>
@@ -446,7 +449,7 @@ p &lt;- p + facet_geo(~State, grid = &#39;us_state_grid3&#39;)</code></pre>
        subtitle = &#39;From Year 2005 to 2016&#39;,
        caption = &#39;Source: 1) onlinembapage.com 2) github.com/rfordatascience/tidytuesday&#39;)</code></pre>
 <ol start="7" style="list-style-type: decimal">
-<li>Finally, customize the theme of the plot. The primary goal is to enlarge the font, and remove the plot borders and minor gridlines to increase data-ink ratio.</li>
+<li>Finally, customize the theme of the plot. The primary goal is to increase the font size, and remove the plot borders and minor gridlines to increase data-ink ratio (remove unnecessary elements).</li>
 </ol>
 <pre class="r"><code>p &lt;- p + theme(axis.text.x = element_text(angle = 90,
                                           vjust = 0.5,
@@ -469,6 +472,7 @@ p &lt;- p + facet_geo(~State, grid = &#39;us_state_grid3&#39;)</code></pre>
 <ul>
 <li>Vignette of <code>geofacet</code> - <a href="https://hafen.github.io/geofacet/" class="uri">https://hafen.github.io/geofacet/</a></li>
 <li>Github page of #TidyTuesday - <a href="https://github.com/rfordatascience/tidytuesday" class="uri">https://github.com/rfordatascience/tidytuesday</a></li>
+<li>Modify components of a theme - <a href="http://ggplot2.tidyverse.org/reference/theme.html" class="uri">http://ggplot2.tidyverse.org/reference/theme.html</a></li>
 </ul>
 </div>
 

@@ -6,6 +6,7 @@ categories: ["R"]
 tags: ["R", "ggplot2", "visualization", "geofacet"]
 output: html_document
 ---
+
 ```{r setup, include=FALSE}
 library(knitr)
 library(kableExtra)
@@ -14,7 +15,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 <p>#TidyTuesday is a weekly data project aimed at the R ecosystem. A dataset is released each week on Tuesday, and those who are interested are challenged to recreate the original charts, improve upon the orignal charts, or create totally different charts with `ggplot2`, `tidyr`, `dplyr`, and other libraries in R.</p>
 
-The purpose of this post, and future posts related to #TidyTUesday, is to document my efforts in recreating/creating various charts using R. The goal, at least for myself, is to learn and use at least one new library or function in each week's challenge. The codes presented and the charts created are not necessary the best, and all constructive criticisms are welcome.
+The purpose of this post, and future posts related to #TidyTuesday, is to document my efforts in recreating/creating various charts using R. The goal, at least for myself, is to learn and use at least one new library or function in each week's challenge. The codes presented and the charts created are not necessary the best, and all constructive criticisms are welcome.
 
 ### Dataset
 
@@ -101,12 +102,15 @@ p <- p +
 
 ```{r }
 library(geofacet)
+
 p <- p + facet_geo(~State, grid = 'us_state_grid3')
 ```
 
-4. Customize the axis labels. Including only the labels for first and the last academic years in x axis, and change the display format to currency in y axis.
+4. Customize the axis labels. Including only the labels for first and the last academic years in x axis, and change the display format to currency in y axis (requires the library `scales`).
 
 ```{r}
+library(scales)
+
 p <- p +
   scale_x_discrete(breaks = c('2004-05', '2015-16'),
                    labels = c('04-05',  '15-16')) +
@@ -135,7 +139,7 @@ p <- p +
        caption = 'Source: 1) onlinembapage.com 2) github.com/rfordatascience/tidytuesday')
 ```
 
-7. Finally, customize the theme of the plot. The primary goal is to enlarge the font, and remove the plot borders and minor gridlines to increase data-ink ratio.
+7. Finally, customize the theme of the plot. The primary goal is to increase the font size, and remove the plot borders and minor gridlines to increase data-ink ratio (remove unnecessary elements).
 
 ```{r}
 p <- p + theme(axis.text.x = element_text(angle = 90,
@@ -160,3 +164,4 @@ Done.
 
 - Vignette of `geofacet` - [https://hafen.github.io/geofacet/](https://hafen.github.io/geofacet/)
 - Github page of #TidyTuesday - [https://github.com/rfordatascience/tidytuesday](https://github.com/rfordatascience/tidytuesday)
+- Modify components of a theme - [http://ggplot2.tidyverse.org/reference/theme.html](http://ggplot2.tidyverse.org/reference/theme.html)

@@ -22,7 +22,7 @@
 &lt;p&gt;
 #TidyTuesday is a weekly data project aimed at the R ecosystem. A dataset is released each week on Tuesday, and those who are interested are challenged to recreate the original charts, improve upon the orignal charts, or create totally different charts with &lt;code&gt;ggplot2&lt;/code&gt;, &lt;code&gt;tidyr&lt;/code&gt;, &lt;code&gt;dplyr&lt;/code&gt;, and other libraries in R.
 &lt;/p&gt;
-&lt;p&gt;The purpose of this post, and future posts related to #TidyTUesday, is to document my efforts in recreating/creating various charts using R. The goal, at least for myself, is to learn and use at least one new library or function in each week’s challenge. The codes presented and the charts created are not necessary the best, and all constructive criticisms are welcome.&lt;/p&gt;
+&lt;p&gt;The purpose of this post, and future posts related to #TidyTuesday, is to document my efforts in recreating/creating various charts using R. The goal, at least for myself, is to learn and use at least one new library or function in each week’s challenge. The codes presented and the charts created are not necessary the best, and all constructive criticisms are welcome.&lt;/p&gt;
 &lt;div id=&#34;dataset&#34; class=&#34;section level3&#34;&gt;
 &lt;h3&gt;Dataset&lt;/h3&gt;
 &lt;p&gt;The original dataset contains the average college tuition cost, based on in-state tuition and fees for one year of full-time study at public four-year institutions, of every state (excluding DC) from the year of 2004 to 2016. Each row represents a state, and each column corresponds to an academic year. The first 5 rows and the first 5 columns of the dataset:&lt;/p&gt;
@@ -334,11 +334,14 @@ Georgia
 &lt;li&gt;Facet the plots by states, and also arrange and display them according to geographic locations by using the library &lt;code&gt;geofacet&lt;/code&gt;. By default, the function &lt;code&gt;facet_geo&lt;/code&gt; uses the grid layout &lt;code&gt;us_state_grid1&lt;/code&gt;, which also includes the geographic location of DC. Since our data does not include DC, we need to use the grid layout &lt;code&gt;us_state_grid3&lt;/code&gt; instead.&lt;/li&gt;
 &lt;/ol&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(geofacet)
+
 p &amp;lt;- p + facet_geo(~State, grid = &amp;#39;us_state_grid3&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
 &lt;ol start=&#34;4&#34; style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;Customize the axis labels. Including only the labels for first and the last academic years in x axis, and change the display format to currency in y axis.&lt;/li&gt;
+&lt;li&gt;Customize the axis labels. Including only the labels for first and the last academic years in x axis, and change the display format to currency in y axis (requires the library &lt;code&gt;scales&lt;/code&gt;).&lt;/li&gt;
 &lt;/ol&gt;
-&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- p +
+&lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(scales)
+
+p &amp;lt;- p +
   scale_x_discrete(breaks = c(&amp;#39;2004-05&amp;#39;, &amp;#39;2015-16&amp;#39;),
                    labels = c(&amp;#39;04-05&amp;#39;,  &amp;#39;15-16&amp;#39;)) +
   scale_y_continuous(labels = dollar)&lt;/code&gt;&lt;/pre&gt;
@@ -361,7 +364,7 @@ p &amp;lt;- p + facet_geo(~State, grid = &amp;#39;us_state_grid3&amp;#39;)&lt;/c
        subtitle = &amp;#39;From Year 2005 to 2016&amp;#39;,
        caption = &amp;#39;Source: 1) onlinembapage.com 2) github.com/rfordatascience/tidytuesday&amp;#39;)&lt;/code&gt;&lt;/pre&gt;
 &lt;ol start=&#34;7&#34; style=&#34;list-style-type: decimal&#34;&gt;
-&lt;li&gt;Finally, customize the theme of the plot. The primary goal is to enlarge the font, and remove the plot borders and minor gridlines to increase data-ink ratio.&lt;/li&gt;
+&lt;li&gt;Finally, customize the theme of the plot. The primary goal is to increase the font size, and remove the plot borders and minor gridlines to increase data-ink ratio (remove unnecessary elements).&lt;/li&gt;
 &lt;/ol&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;p &amp;lt;- p + theme(axis.text.x = element_text(angle = 90,
                                           vjust = 0.5,
@@ -384,6 +387,7 @@ p &amp;lt;- p + facet_geo(~State, grid = &amp;#39;us_state_grid3&amp;#39;)&lt;/c
 &lt;ul&gt;
 &lt;li&gt;Vignette of &lt;code&gt;geofacet&lt;/code&gt; - &lt;a href=&#34;https://hafen.github.io/geofacet/&#34; class=&#34;uri&#34;&gt;https://hafen.github.io/geofacet/&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;Github page of #TidyTuesday - &lt;a href=&#34;https://github.com/rfordatascience/tidytuesday&#34; class=&#34;uri&#34;&gt;https://github.com/rfordatascience/tidytuesday&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;Modify components of a theme - &lt;a href=&#34;http://ggplot2.tidyverse.org/reference/theme.html&#34; class=&#34;uri&#34;&gt;http://ggplot2.tidyverse.org/reference/theme.html&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 </description>
