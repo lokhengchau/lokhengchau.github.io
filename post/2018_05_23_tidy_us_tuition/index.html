@@ -100,7 +100,7 @@
 
 <div class="post">
   <h1 class="post-title">#TidyTuesday Challenge Week 1 - US Tuition</h1>
-  <span class="post-date">May 13 2018</span>
+  <span class="post-date">May 25 2018</span>
   <script src="/rmarkdown-libs/kePrint/kePrint.js"></script>
 
 
@@ -364,7 +364,7 @@ California
 </tbody>
 </table>
 <p>There are certainly many possibilities to go about how to visualize the data. My idea is to compare and contrast the trend of increase (or decrease) in college tuition of each state with the national average to see which states are relatively more or less expensive. Here is my final chart for this data set:</p>
-<p><a href="avg_us_tuition.png"><img src="avg_us_tuition.png" alt="US College Tuition" /></a></p>
+<p><a href="../avg_us_tuition.png"><img src="../avg_us_tuition.png" alt="US College Tuition" /></a></p>
 <p>To make this chart, I need to manipulate and restructure my dataset. First, I need to calculate the average tuition of each year:</p>
 <pre class="r"><code>library(tidyverse)
 df[51,2:13] &lt;- sapply(df[2:13], mean)

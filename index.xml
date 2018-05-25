@@ -6,14 +6,14 @@
     <language>en-us</language>
     <author>Lok H. Chau</author>
     <rights>(C) 2018</rights>
-    <updated>2018-05-13 01:13:15 -0500 -0500</updated>
+    <updated>2018-05-25 01:13:15 -0500 -0500</updated>
 
     
       
         <item>
           <title>#TidyTuesday Challenge Week 1 - US Tuition</title>
           <link>/post/2018_05_23_tidy_us_tuition/</link>
-          <pubDate>Sun, 13 May 2018 01:13:15 -0500</pubDate>
+          <pubDate>Fri, 25 May 2018 01:13:15 -0500</pubDate>
           <author>Lok H. Chau</author>
           <guid>/post/2018_05_23_tidy_us_tuition/</guid>
           <description>&lt;script src=&#34;/rmarkdown-libs/kePrint/kePrint.js&#34;&gt;&lt;/script&gt;
@@ -279,7 +279,7 @@ California
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;There are certainly many possibilities to go about how to visualize the data. My idea is to compare and contrast the trend of increase (or decrease) in college tuition of each state with the national average to see which states are relatively more or less expensive. Here is my final chart for this data set:&lt;/p&gt;
-&lt;p&gt;&lt;a href=&#34;avg_us_tuition.png&#34;&gt;&lt;img src=&#34;avg_us_tuition.png&#34; alt=&#34;US College Tuition&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;../avg_us_tuition.png&#34;&gt;&lt;img src=&#34;../avg_us_tuition.png&#34; alt=&#34;US College Tuition&#34; /&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;To make this chart, I need to manipulate and restructure my dataset. First, I need to calculate the average tuition of each year:&lt;/p&gt;
 &lt;pre class=&#34;r&#34;&gt;&lt;code&gt;library(tidyverse)
 df[51,2:13] &amp;lt;- sapply(df[2:13], mean)

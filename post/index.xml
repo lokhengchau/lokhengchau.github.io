@@ -6,7 +6,7 @@
     <description>Recent content in Posts on My New Hugo Site</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 May 2018 01:13:15 -0500</lastBuildDate>
+    <lastBuildDate>Fri, 25 May 2018 01:13:15 -0500</lastBuildDate>
     
 	<atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     
@@ -14,7 +14,7 @@
     <item>
       <title>#TidyTuesday Challenge Week 1 - US Tuition</title>
       <link>/post/2018_05_23_tidy_us_tuition/</link>
-      <pubDate>Sun, 13 May 2018 01:13:15 -0500</pubDate>
+      <pubDate>Fri, 25 May 2018 01:13:15 -0500</pubDate>
       
       <guid>/post/2018_05_23_tidy_us_tuition/</guid>
       <description>#TidyTuesday is a weekly data project aimed at the R ecosystem. A dataset is released each week on Tuesday, and those who are interested are challenged to recreate the original charts, improve upon the orignal charts, or create totally different charts with ggplot2, tidyr, dplyr, and other libraries in R.The purpose of this post, and future posts related to #TidyTUesday, is to document my efforts in recreating/creating various charts using R.</description>

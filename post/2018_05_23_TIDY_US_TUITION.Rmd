@@ -1,7 +1,7 @@
 ---
 title: "#TidyTuesday Challenge Week 1 - US Tuition"
 author: "Lok H. Chau"
-date: 2018-05-13T1:13:15-05:00
+date: 2018-05-25T1:13:15-05:00
 categories: ["R"]
 tags: ["R", "ggplot2", "visualization", "geofacet"]
 output: html_document
@@ -37,7 +37,7 @@ df %>%
 
 There are certainly many possibilities to go about how to visualize the data. My idea is to compare and contrast the trend of increase (or decrease) in college tuition of each state with the national average to see which states are relatively more or less expensive. Here is my final chart for this data set:
 
-[![US College Tuition](avg_us_tuition.png)](avg_us_tuition.png)
+[![US College Tuition](../avg_us_tuition.png)](../avg_us_tuition.png)
 
 To make this chart, I need to manipulate and restructure my dataset. First, I need to calculate the average tuition of each year:
 
