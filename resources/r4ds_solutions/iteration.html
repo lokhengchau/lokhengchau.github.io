@@ -1,0 +1,986 @@
+<!DOCTYPE html>
+<html >
+
+<head>
+
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Unofficial Solutions to R for Data Science</title>
+  <meta name="description" content="This bookdown contains unofficial solutions to the exercises in R for Data Science written by Hadley Wickham and Garret Grolemund.">
+  <meta name="generator" content="bookdown 0.7 and GitBook 2.6.7">
+
+  <meta property="og:title" content="Unofficial Solutions to R for Data Science" />
+  <meta property="og:type" content="book" />
+  
+  
+  <meta property="og:description" content="This bookdown contains unofficial solutions to the exercises in R for Data Science written by Hadley Wickham and Garret Grolemund." />
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Unofficial Solutions to R for Data Science" />
+  
+  <meta name="twitter:description" content="This bookdown contains unofficial solutions to the exercises in R for Data Science written by Hadley Wickham and Garret Grolemund." />
+  
+
+<meta name="author" content="Lok H. Chau">
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  
+  
+<link rel="prev" href="vectors.html">
+<link rel="next" href="introduction-17.html">
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+
+
+
+
+
+
+
+<script src="libs/htmlwidgets-1.0/htmlwidgets.js"></script>
+<link href="libs/str_view-0.1.0/str_view.css" rel="stylesheet" />
+<script src="libs/str_view-binding-1.2.0/str_view.js"></script>
+
+
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">Unoffical Solutions to R4DS</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>About</a></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a></li>
+<li class="part"><span><b>I Explore</b></span></li>
+<li class="chapter" data-level="2" data-path="introduction-1.html"><a href="introduction-1.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="data-visualization.html"><a href="data-visualization.html"><i class="fa fa-check"></i><b>3</b> Data visualization</a><ul>
+<li class="chapter" data-level="3.1" data-path="data-visualization.html"><a href="data-visualization.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="data-visualization.html"><a href="data-visualization.html#first-steps"><i class="fa fa-check"></i><b>3.2</b> First steps</a><ul>
+<li class="chapter" data-level="3.2.1" data-path="data-visualization.html"><a href="data-visualization.html#exercises"><i class="fa fa-check"></i><b>3.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.3" data-path="data-visualization.html"><a href="data-visualization.html#aesthetic-mappings"><i class="fa fa-check"></i><b>3.3</b> Aesthetic mappings</a><ul>
+<li class="chapter" data-level="3.3.1" data-path="data-visualization.html"><a href="data-visualization.html#exercises-1"><i class="fa fa-check"></i><b>3.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="data-visualization.html"><a href="data-visualization.html#common-problems"><i class="fa fa-check"></i><b>3.4</b> Common problems</a></li>
+<li class="chapter" data-level="3.5" data-path="data-visualization.html"><a href="data-visualization.html#facets"><i class="fa fa-check"></i><b>3.5</b> Facets</a><ul>
+<li class="chapter" data-level="3.5.1" data-path="data-visualization.html"><a href="data-visualization.html#exercises-2"><i class="fa fa-check"></i><b>3.5.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.6" data-path="data-visualization.html"><a href="data-visualization.html#geometric-objects"><i class="fa fa-check"></i><b>3.6</b> Geometric objects</a><ul>
+<li class="chapter" data-level="3.6.1" data-path="data-visualization.html"><a href="data-visualization.html#exercises-3"><i class="fa fa-check"></i><b>3.6.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.7" data-path="data-visualization.html"><a href="data-visualization.html#statistical-transformations"><i class="fa fa-check"></i><b>3.7</b> Statistical transformations</a><ul>
+<li class="chapter" data-level="3.7.1" data-path="data-visualization.html"><a href="data-visualization.html#exercises-4"><i class="fa fa-check"></i><b>3.7.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.8" data-path="data-visualization.html"><a href="data-visualization.html#position-adjustments"><i class="fa fa-check"></i><b>3.8</b> Position adjustments</a><ul>
+<li class="chapter" data-level="3.8.1" data-path="data-visualization.html"><a href="data-visualization.html#exercises-5"><i class="fa fa-check"></i><b>3.8.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.9" data-path="data-visualization.html"><a href="data-visualization.html#coordinate-systems"><i class="fa fa-check"></i><b>3.9</b> Coordinate systems</a><ul>
+<li class="chapter" data-level="3.9.1" data-path="data-visualization.html"><a href="data-visualization.html#exercises-6"><i class="fa fa-check"></i><b>3.9.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="3.10" data-path="data-visualization.html"><a href="data-visualization.html#the-layered-grammar-of-graphics"><i class="fa fa-check"></i><b>3.10</b> The layered grammar of graphics</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="workflow-basics.html"><a href="workflow-basics.html"><i class="fa fa-check"></i><b>4</b> Workflow Basics</a><ul>
+<li class="chapter" data-level="4.1" data-path="workflow-basics.html"><a href="workflow-basics.html#coding-basics"><i class="fa fa-check"></i><b>4.1</b> Coding basics</a></li>
+<li class="chapter" data-level="4.2" data-path="workflow-basics.html"><a href="workflow-basics.html#whats-in-a-name"><i class="fa fa-check"></i><b>4.2</b> What’s in a name?</a></li>
+<li class="chapter" data-level="4.3" data-path="workflow-basics.html"><a href="workflow-basics.html#calling-functions"><i class="fa fa-check"></i><b>4.3</b> Calling functions</a></li>
+<li class="chapter" data-level="4.4" data-path="workflow-basics.html"><a href="workflow-basics.html#practice"><i class="fa fa-check"></i><b>4.4</b> Practice</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="data-transformation.html"><a href="data-transformation.html"><i class="fa fa-check"></i><b>5</b> Data transformation</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-transformation.html"><a href="data-transformation.html#introduction-3"><i class="fa fa-check"></i><b>5.1</b> Introduction</a></li>
+<li class="chapter" data-level="5.2" data-path="data-transformation.html"><a href="data-transformation.html#filter-rows-with-filter"><i class="fa fa-check"></i><b>5.2</b> Filter rows with <code>filter()</code></a><ul>
+<li class="chapter" data-level="5.2.1" data-path="data-transformation.html"><a href="data-transformation.html#exercises-7"><i class="fa fa-check"></i><b>5.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="data-transformation.html"><a href="data-transformation.html#arrange-rows-with-arrange"><i class="fa fa-check"></i><b>5.3</b> Arrange rows with <code>arrange()</code></a><ul>
+<li class="chapter" data-level="5.3.1" data-path="data-transformation.html"><a href="data-transformation.html#exercises-8"><i class="fa fa-check"></i><b>5.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="data-transformation.html"><a href="data-transformation.html#select-columns-with-select"><i class="fa fa-check"></i><b>5.4</b> Select columns with <code>select()</code></a><ul>
+<li class="chapter" data-level="5.4.1" data-path="data-transformation.html"><a href="data-transformation.html#exercises-9"><i class="fa fa-check"></i><b>5.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="data-transformation.html"><a href="data-transformation.html#add-new-variables-with-mutate"><i class="fa fa-check"></i><b>5.5</b> Add new variables with <code>mutate()</code></a><ul>
+<li class="chapter" data-level="5.5.1" data-path="data-transformation.html"><a href="data-transformation.html#exercises-10"><i class="fa fa-check"></i><b>5.5.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.6" data-path="data-transformation.html"><a href="data-transformation.html#grouped-summaries-with-summarise"><i class="fa fa-check"></i><b>5.6</b> Grouped summaries with <code>summarise()</code></a><ul>
+<li class="chapter" data-level="5.6.1" data-path="data-transformation.html"><a href="data-transformation.html#exercises-11"><i class="fa fa-check"></i><b>5.6.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="data-transformation.html"><a href="data-transformation.html#grouped-mutates-and-filters"><i class="fa fa-check"></i><b>5.7</b> Grouped mutates (and filters)</a><ul>
+<li class="chapter" data-level="5.7.1" data-path="data-transformation.html"><a href="data-transformation.html#exercises-12"><i class="fa fa-check"></i><b>5.7.1</b> Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="workflow-scripts.html"><a href="workflow-scripts.html"><i class="fa fa-check"></i><b>6</b> Workflow: scripts</a></li>
+<li class="chapter" data-level="7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html"><i class="fa fa-check"></i><b>7</b> Exploratory Data Analysis</a><ul>
+<li class="chapter" data-level="7.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#introduction-4"><i class="fa fa-check"></i><b>7.1</b> Introduction</a></li>
+<li class="chapter" data-level="7.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#questions"><i class="fa fa-check"></i><b>7.2</b> Questions</a></li>
+<li class="chapter" data-level="7.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#variation"><i class="fa fa-check"></i><b>7.3</b> Variation</a><ul>
+<li class="chapter" data-level="7.3.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-13"><i class="fa fa-check"></i><b>7.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.4" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#missing-values"><i class="fa fa-check"></i><b>7.4</b> Missing values</a><ul>
+<li class="chapter" data-level="7.4.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#exercises-14"><i class="fa fa-check"></i><b>7.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="7.5" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#covariation"><i class="fa fa-check"></i><b>7.5</b> Covariation</a><ul>
+<li class="chapter" data-level="7.5.1" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#a-categorical-and-continuous-variable"><i class="fa fa-check"></i><b>7.5.1</b> A categorical and continuous variable</a></li>
+<li class="chapter" data-level="7.5.2" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#two-categorical-variables"><i class="fa fa-check"></i><b>7.5.2</b> Two categorical variables</a></li>
+<li class="chapter" data-level="7.5.3" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#two-continuous-variables"><i class="fa fa-check"></i><b>7.5.3</b> Two continuous variables</a></li>
+</ul></li>
+<li class="chapter" data-level="7.6" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#patterns-and-models"><i class="fa fa-check"></i><b>7.6</b> Patterns and models</a></li>
+<li class="chapter" data-level="7.7" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#ggplot2-calls"><i class="fa fa-check"></i><b>7.7</b> ggplot2 calls</a></li>
+<li class="chapter" data-level="7.8" data-path="exploratory-data-analysis.html"><a href="exploratory-data-analysis.html#learning-more"><i class="fa fa-check"></i><b>7.8</b> Learning more</a></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="workflow-projects.html"><a href="workflow-projects.html"><i class="fa fa-check"></i><b>8</b> Workflow: projects</a></li>
+<li class="part"><span><b>II Wrangle</b></span></li>
+<li class="chapter" data-level="9" data-path="introduction-5.html"><a href="introduction-5.html"><i class="fa fa-check"></i><b>9</b> Introduction</a></li>
+<li class="chapter" data-level="10" data-path="tibbles.html"><a href="tibbles.html"><i class="fa fa-check"></i><b>10</b> Tibbles</a><ul>
+<li class="chapter" data-level="10.1" data-path="tibbles.html"><a href="tibbles.html#introduction-6"><i class="fa fa-check"></i><b>10.1</b> Introduction</a></li>
+<li class="chapter" data-level="10.2" data-path="tibbles.html"><a href="tibbles.html#creating-tibbles"><i class="fa fa-check"></i><b>10.2</b> Creating tibbles</a></li>
+<li class="chapter" data-level="10.3" data-path="tibbles.html"><a href="tibbles.html#tibbles-vs.data.frame"><i class="fa fa-check"></i><b>10.3</b> Tibbles vs. data.frame</a></li>
+<li class="chapter" data-level="10.4" data-path="tibbles.html"><a href="tibbles.html#interacting-with-older-code"><i class="fa fa-check"></i><b>10.4</b> Interacting with older code</a></li>
+<li class="chapter" data-level="10.5" data-path="tibbles.html"><a href="tibbles.html#exercises-18"><i class="fa fa-check"></i><b>10.5</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11" data-path="data-import.html"><a href="data-import.html"><i class="fa fa-check"></i><b>11</b> Data Import</a><ul>
+<li class="chapter" data-level="11.1" data-path="data-import.html"><a href="data-import.html#introduction-7"><i class="fa fa-check"></i><b>11.1</b> Introduction</a></li>
+<li class="chapter" data-level="11.2" data-path="data-import.html"><a href="data-import.html#getting-started"><i class="fa fa-check"></i><b>11.2</b> Getting started</a><ul>
+<li class="chapter" data-level="11.2.1" data-path="data-import.html"><a href="data-import.html#exercises-19"><i class="fa fa-check"></i><b>11.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11.3" data-path="data-import.html"><a href="data-import.html#parsing-a-vector"><i class="fa fa-check"></i><b>11.3</b> Parsing a vector</a><ul>
+<li class="chapter" data-level="11.3.1" data-path="data-import.html"><a href="data-import.html#exercises-20"><i class="fa fa-check"></i><b>11.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="11.4" data-path="data-import.html"><a href="data-import.html#parsing-a-file"><i class="fa fa-check"></i><b>11.4</b> Parsing a file</a></li>
+<li class="chapter" data-level="11.5" data-path="data-import.html"><a href="data-import.html#writing-to-a-file"><i class="fa fa-check"></i><b>11.5</b> Writing to a file</a></li>
+<li class="chapter" data-level="11.6" data-path="data-import.html"><a href="data-import.html#other-types-of-data"><i class="fa fa-check"></i><b>11.6</b> Other types of data</a></li>
+</ul></li>
+<li class="chapter" data-level="12" data-path="tidy-data.html"><a href="tidy-data.html"><i class="fa fa-check"></i><b>12</b> Tidy data</a><ul>
+<li class="chapter" data-level="12.1" data-path="tidy-data.html"><a href="tidy-data.html#introduction-8"><i class="fa fa-check"></i><b>12.1</b> Introduction</a></li>
+<li class="chapter" data-level="12.2" data-path="tidy-data.html"><a href="tidy-data.html#tidy-data-1"><i class="fa fa-check"></i><b>12.2</b> Tidy data</a><ul>
+<li class="chapter" data-level="12.2.1" data-path="tidy-data.html"><a href="tidy-data.html#exercises-21"><i class="fa fa-check"></i><b>12.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12.3" data-path="tidy-data.html"><a href="tidy-data.html#spreading-and-gathering"><i class="fa fa-check"></i><b>12.3</b> Spreading and gathering</a><ul>
+<li class="chapter" data-level="12.3.1" data-path="tidy-data.html"><a href="tidy-data.html#exercises-22"><i class="fa fa-check"></i><b>12.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12.4" data-path="tidy-data.html"><a href="tidy-data.html#separating-and-uniting"><i class="fa fa-check"></i><b>12.4</b> Separating and uniting</a><ul>
+<li class="chapter" data-level="12.4.1" data-path="tidy-data.html"><a href="tidy-data.html#exercises-23"><i class="fa fa-check"></i><b>12.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12.5" data-path="tidy-data.html"><a href="tidy-data.html#missing-values-1"><i class="fa fa-check"></i><b>12.5</b> Missing values</a><ul>
+<li class="chapter" data-level="12.5.1" data-path="tidy-data.html"><a href="tidy-data.html#exercises-24"><i class="fa fa-check"></i><b>12.5.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12.6" data-path="tidy-data.html"><a href="tidy-data.html#case-study"><i class="fa fa-check"></i><b>12.6</b> Case Study</a><ul>
+<li class="chapter" data-level="12.6.1" data-path="tidy-data.html"><a href="tidy-data.html#exercises-25"><i class="fa fa-check"></i><b>12.6.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="12.7" data-path="tidy-data.html"><a href="tidy-data.html#non-tidy-data"><i class="fa fa-check"></i><b>12.7</b> Non-tidy data</a></li>
+</ul></li>
+<li class="chapter" data-level="13" data-path="relational-data.html"><a href="relational-data.html"><i class="fa fa-check"></i><b>13</b> Relational data</a><ul>
+<li class="chapter" data-level="13.1" data-path="relational-data.html"><a href="relational-data.html#introduction-9"><i class="fa fa-check"></i><b>13.1</b> Introduction</a></li>
+<li class="chapter" data-level="13.2" data-path="relational-data.html"><a href="relational-data.html#nycflights13"><i class="fa fa-check"></i><b>13.2</b> nycflights13</a><ul>
+<li class="chapter" data-level="13.2.1" data-path="relational-data.html"><a href="relational-data.html#exercises-26"><i class="fa fa-check"></i><b>13.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13.3" data-path="relational-data.html"><a href="relational-data.html#keys"><i class="fa fa-check"></i><b>13.3</b> Keys</a><ul>
+<li class="chapter" data-level="13.3.1" data-path="relational-data.html"><a href="relational-data.html#exercises-27"><i class="fa fa-check"></i><b>13.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13.4" data-path="relational-data.html"><a href="relational-data.html#mutating-joins"><i class="fa fa-check"></i><b>13.4</b> Mutating joins</a><ul>
+<li class="chapter" data-level="13.4.1" data-path="relational-data.html"><a href="relational-data.html#exercises-28"><i class="fa fa-check"></i><b>13.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13.5" data-path="relational-data.html"><a href="relational-data.html#filtering-joins"><i class="fa fa-check"></i><b>13.5</b> Filtering joins</a><ul>
+<li class="chapter" data-level="13.5.1" data-path="relational-data.html"><a href="relational-data.html#exercises-29"><i class="fa fa-check"></i><b>13.5.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="13.6" data-path="relational-data.html"><a href="relational-data.html#join-problems"><i class="fa fa-check"></i><b>13.6</b> Join problems</a></li>
+<li class="chapter" data-level="13.7" data-path="relational-data.html"><a href="relational-data.html#set-operations"><i class="fa fa-check"></i><b>13.7</b> Set operations</a></li>
+</ul></li>
+<li class="chapter" data-level="14" data-path="strings.html"><a href="strings.html"><i class="fa fa-check"></i><b>14</b> Strings</a><ul>
+<li class="chapter" data-level="14.1" data-path="strings.html"><a href="strings.html#introduction-10"><i class="fa fa-check"></i><b>14.1</b> Introduction</a></li>
+<li class="chapter" data-level="14.2" data-path="strings.html"><a href="strings.html#string-basics"><i class="fa fa-check"></i><b>14.2</b> String basics</a><ul>
+<li class="chapter" data-level="14.2.1" data-path="strings.html"><a href="strings.html#exercises-30"><i class="fa fa-check"></i><b>14.2.1</b> Exercises</a></li>
+<li class="chapter" data-level="14.2.2" data-path="strings.html"><a href="strings.html#matching-patterns-with-regular-expressions"><i class="fa fa-check"></i><b>14.2.2</b> Matching patterns with regular expressions</a></li>
+</ul></li>
+<li class="chapter" data-level="14.3" data-path="strings.html"><a href="strings.html#tools"><i class="fa fa-check"></i><b>14.3</b> Tools</a><ul>
+<li class="chapter" data-level="14.3.1" data-path="strings.html"><a href="strings.html#detect-matches"><i class="fa fa-check"></i><b>14.3.1</b> Detect matches</a></li>
+<li class="chapter" data-level="14.3.2" data-path="strings.html"><a href="strings.html#exercises-31"><i class="fa fa-check"></i><b>14.3.2</b> Exercises</a></li>
+<li class="chapter" data-level="14.3.3" data-path="strings.html"><a href="strings.html#extract-matches"><i class="fa fa-check"></i><b>14.3.3</b> Extract matches</a></li>
+<li class="chapter" data-level="14.3.4" data-path="strings.html"><a href="strings.html#grouped-matches"><i class="fa fa-check"></i><b>14.3.4</b> Grouped matches</a></li>
+<li class="chapter" data-level="14.3.5" data-path="strings.html"><a href="strings.html#replacing-matches"><i class="fa fa-check"></i><b>14.3.5</b> Replacing matches</a></li>
+<li class="chapter" data-level="14.3.6" data-path="strings.html"><a href="strings.html#splitting"><i class="fa fa-check"></i><b>14.3.6</b> Splitting</a></li>
+<li class="chapter" data-level="14.3.7" data-path="strings.html"><a href="strings.html#find-matches"><i class="fa fa-check"></i><b>14.3.7</b> Find matches</a></li>
+</ul></li>
+<li class="chapter" data-level="14.4" data-path="strings.html"><a href="strings.html#other-types-of-pattern"><i class="fa fa-check"></i><b>14.4</b> Other types of pattern</a><ul>
+<li class="chapter" data-level="14.4.1" data-path="strings.html"><a href="strings.html#exercises-36"><i class="fa fa-check"></i><b>14.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="14.5" data-path="strings.html"><a href="strings.html#other-uses-of-regular-expressions"><i class="fa fa-check"></i><b>14.5</b> Other uses of regular expressions</a></li>
+<li class="chapter" data-level="14.6" data-path="strings.html"><a href="strings.html#stringi"><i class="fa fa-check"></i><b>14.6</b> stringi</a><ul>
+<li class="chapter" data-level="14.6.1" data-path="strings.html"><a href="strings.html#exercises-37"><i class="fa fa-check"></i><b>14.6.1</b> Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="15" data-path="factors.html"><a href="factors.html"><i class="fa fa-check"></i><b>15</b> Factors</a><ul>
+<li class="chapter" data-level="15.1" data-path="factors.html"><a href="factors.html#introduction-11"><i class="fa fa-check"></i><b>15.1</b> Introduction</a></li>
+<li class="chapter" data-level="15.2" data-path="factors.html"><a href="factors.html#creating-factors"><i class="fa fa-check"></i><b>15.2</b> Creating factors</a></li>
+<li class="chapter" data-level="15.3" data-path="factors.html"><a href="factors.html#general-social-survey"><i class="fa fa-check"></i><b>15.3</b> General Social Survey</a><ul>
+<li class="chapter" data-level="15.3.1" data-path="factors.html"><a href="factors.html#exercise"><i class="fa fa-check"></i><b>15.3.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="15.4" data-path="factors.html"><a href="factors.html#modifying-factor-order"><i class="fa fa-check"></i><b>15.4</b> Modifying factor order</a><ul>
+<li class="chapter" data-level="15.4.1" data-path="factors.html"><a href="factors.html#exercises-38"><i class="fa fa-check"></i><b>15.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="15.5" data-path="factors.html"><a href="factors.html#modifying-factor-levels"><i class="fa fa-check"></i><b>15.5</b> Modifying factor levels</a><ul>
+<li class="chapter" data-level="15.5.1" data-path="factors.html"><a href="factors.html#exercises-39"><i class="fa fa-check"></i><b>15.5.1</b> Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="16" data-path="dates-and-times.html"><a href="dates-and-times.html"><i class="fa fa-check"></i><b>16</b> Dates and times</a><ul>
+<li class="chapter" data-level="16.1" data-path="dates-and-times.html"><a href="dates-and-times.html#introduction-12"><i class="fa fa-check"></i><b>16.1</b> Introduction</a></li>
+<li class="chapter" data-level="16.2" data-path="dates-and-times.html"><a href="dates-and-times.html#creating-datetimes"><i class="fa fa-check"></i><b>16.2</b> Creating date/times</a><ul>
+<li class="chapter" data-level="16.2.1" data-path="dates-and-times.html"><a href="dates-and-times.html#exercises-40"><i class="fa fa-check"></i><b>16.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="16.3" data-path="dates-and-times.html"><a href="dates-and-times.html#date-time-components"><i class="fa fa-check"></i><b>16.3</b> Date-time components</a><ul>
+<li class="chapter" data-level="16.3.1" data-path="dates-and-times.html"><a href="dates-and-times.html#exercises-41"><i class="fa fa-check"></i><b>16.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="16.4" data-path="dates-and-times.html"><a href="dates-and-times.html#time-spans"><i class="fa fa-check"></i><b>16.4</b> Time spans</a><ul>
+<li class="chapter" data-level="16.4.1" data-path="dates-and-times.html"><a href="dates-and-times.html#exercises-42"><i class="fa fa-check"></i><b>16.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="16.5" data-path="dates-and-times.html"><a href="dates-and-times.html#time-zones"><i class="fa fa-check"></i><b>16.5</b> Time zones</a></li>
+</ul></li>
+<li class="part"><span><b>III Program</b></span></li>
+<li class="chapter" data-level="17" data-path="introduction-13.html"><a href="introduction-13.html"><i class="fa fa-check"></i><b>17</b> Introduction</a></li>
+<li class="chapter" data-level="18" data-path="pipes.html"><a href="pipes.html"><i class="fa fa-check"></i><b>18</b> Pipes</a></li>
+<li class="chapter" data-level="19" data-path="functions.html"><a href="functions.html"><i class="fa fa-check"></i><b>19</b> Functions</a><ul>
+<li class="chapter" data-level="19.1" data-path="functions.html"><a href="functions.html#introduction-14"><i class="fa fa-check"></i><b>19.1</b> Introduction</a></li>
+<li class="chapter" data-level="19.2" data-path="functions.html"><a href="functions.html#when-should-you-write-a-function"><i class="fa fa-check"></i><b>19.2</b> When should you write a function?</a><ul>
+<li class="chapter" data-level="19.2.1" data-path="functions.html"><a href="functions.html#practice-1"><i class="fa fa-check"></i><b>19.2.1</b> Practice</a></li>
+</ul></li>
+<li class="chapter" data-level="19.3" data-path="functions.html"><a href="functions.html#functions-are-for-humans-and-computers"><i class="fa fa-check"></i><b>19.3</b> Functions are for humans and computers</a><ul>
+<li class="chapter" data-level="19.3.1" data-path="functions.html"><a href="functions.html#exercises-43"><i class="fa fa-check"></i><b>19.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="19.4" data-path="functions.html"><a href="functions.html#conditional-execution"><i class="fa fa-check"></i><b>19.4</b> Conditional execution</a><ul>
+<li class="chapter" data-level="19.4.1" data-path="functions.html"><a href="functions.html#exercises-44"><i class="fa fa-check"></i><b>19.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="19.5" data-path="functions.html"><a href="functions.html#function-arguments"><i class="fa fa-check"></i><b>19.5</b> Function arguments</a><ul>
+<li class="chapter" data-level="19.5.1" data-path="functions.html"><a href="functions.html#exercises-45"><i class="fa fa-check"></i><b>19.5.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="19.6" data-path="functions.html"><a href="functions.html#return-values"><i class="fa fa-check"></i><b>19.6</b> Return values</a></li>
+<li class="chapter" data-level="19.7" data-path="functions.html"><a href="functions.html#environment"><i class="fa fa-check"></i><b>19.7</b> Environment</a></li>
+</ul></li>
+<li class="chapter" data-level="20" data-path="vectors.html"><a href="vectors.html"><i class="fa fa-check"></i><b>20</b> Vectors</a><ul>
+<li class="chapter" data-level="20.1" data-path="vectors.html"><a href="vectors.html#introduction-15"><i class="fa fa-check"></i><b>20.1</b> Introduction</a></li>
+<li class="chapter" data-level="20.2" data-path="vectors.html"><a href="vectors.html#vector-basics"><i class="fa fa-check"></i><b>20.2</b> Vector basics</a></li>
+<li class="chapter" data-level="20.3" data-path="vectors.html"><a href="vectors.html#important-types-of-atomic-vector"><i class="fa fa-check"></i><b>20.3</b> Important types of atomic vector</a><ul>
+<li class="chapter" data-level="20.3.1" data-path="vectors.html"><a href="vectors.html#exercises-46"><i class="fa fa-check"></i><b>20.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="20.4" data-path="vectors.html"><a href="vectors.html#using-atomic-vectors"><i class="fa fa-check"></i><b>20.4</b> Using atomic vectors</a><ul>
+<li class="chapter" data-level="20.4.1" data-path="vectors.html"><a href="vectors.html#exercises-47"><i class="fa fa-check"></i><b>20.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="20.5" data-path="vectors.html"><a href="vectors.html#recursive-vectors-lists"><i class="fa fa-check"></i><b>20.5</b> Recursive vectors (lists)</a><ul>
+<li class="chapter" data-level="20.5.1" data-path="vectors.html"><a href="vectors.html#exercise-1"><i class="fa fa-check"></i><b>20.5.1</b> Exercise</a></li>
+</ul></li>
+<li class="chapter" data-level="20.6" data-path="vectors.html"><a href="vectors.html#attributes"><i class="fa fa-check"></i><b>20.6</b> Attributes</a></li>
+<li class="chapter" data-level="20.7" data-path="vectors.html"><a href="vectors.html#augmented-vectors"><i class="fa fa-check"></i><b>20.7</b> Augmented vectors</a></li>
+</ul></li>
+<li class="chapter" data-level="21" data-path="iteration.html"><a href="iteration.html"><i class="fa fa-check"></i><b>21</b> Iteration</a><ul>
+<li class="chapter" data-level="21.1" data-path="iteration.html"><a href="iteration.html#introduction-16"><i class="fa fa-check"></i><b>21.1</b> Introduction</a></li>
+<li class="chapter" data-level="21.2" data-path="iteration.html"><a href="iteration.html#for-loops"><i class="fa fa-check"></i><b>21.2</b> For loops</a><ul>
+<li class="chapter" data-level="21.2.1" data-path="iteration.html"><a href="iteration.html#exercises-48"><i class="fa fa-check"></i><b>21.2.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="21.3" data-path="iteration.html"><a href="iteration.html#for-loop-variations"><i class="fa fa-check"></i><b>21.3</b> For loop variations</a><ul>
+<li class="chapter" data-level="21.3.1" data-path="iteration.html"><a href="iteration.html#exercises-49"><i class="fa fa-check"></i><b>21.3.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="21.4" data-path="iteration.html"><a href="iteration.html#for-loops-vs.functionals"><i class="fa fa-check"></i><b>21.4</b> For loops vs. functionals</a><ul>
+<li class="chapter" data-level="21.4.1" data-path="iteration.html"><a href="iteration.html#exercises-50"><i class="fa fa-check"></i><b>21.4.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="21.5" data-path="iteration.html"><a href="iteration.html#the-map-functions"><i class="fa fa-check"></i><b>21.5</b> The map functions</a><ul>
+<li class="chapter" data-level="21.5.1" data-path="iteration.html"><a href="iteration.html#exercises-51"><i class="fa fa-check"></i><b>21.5.1</b> Exercises</a></li>
+</ul></li>
+<li class="chapter" data-level="21.6" data-path="iteration.html"><a href="iteration.html#dealing-with-failure"><i class="fa fa-check"></i><b>21.6</b> Dealing with failure</a></li>
+<li class="chapter" data-level="21.7" data-path="iteration.html"><a href="iteration.html#mapping-over-multiple-arguments"><i class="fa fa-check"></i><b>21.7</b> Mapping over multiple arguments</a></li>
+<li class="chapter" data-level="21.8" data-path="iteration.html"><a href="iteration.html#walk"><i class="fa fa-check"></i><b>21.8</b> Walk</a></li>
+<li class="chapter" data-level="21.9" data-path="iteration.html"><a href="iteration.html#other-patterns-of-for-loops"><i class="fa fa-check"></i><b>21.9</b> Other patterns of for loops</a><ul>
+<li class="chapter" data-level="21.9.1" data-path="iteration.html"><a href="iteration.html#exercises-52"><i class="fa fa-check"></i><b>21.9.1</b> Exercises</a></li>
+</ul></li>
+</ul></li>
+<li class="part"><span><b>IV Model</b></span></li>
+<li class="chapter" data-level="22" data-path="introduction-17.html"><a href="introduction-17.html"><i class="fa fa-check"></i><b>22</b> Introduction</a></li>
+<li class="part"><span><b>V Communicate</b></span></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Unofficial Solutions to R for Data Science</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="iteration" class="section level1">
+<h1><span class="header-section-number">21</span> Iteration</h1>
+<div id="introduction-16" class="section level2">
+<h2><span class="header-section-number">21.1</span> Introduction</h2>
+<p>No exercises.</p>
+</div>
+<div id="for-loops" class="section level2">
+<h2><span class="header-section-number">21.2</span> For loops</h2>
+<div id="exercises-48" class="section level3">
+<h3><span class="header-section-number">21.2.1</span> Exercises</h3>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(tidyverse)</code></pre></div>
+<p><em>1. Write for loops to:</em></p>
+<p><em>Compute the mean of every column in mtcars.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(mtcars)){
+  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Mean of&quot;</span>, <span class="kw">colnames</span>(mtcars)[i], <span class="st">&quot;:&quot;</span>, <span class="kw">mean</span>(mtcars[,i])))
+}</code></pre></div>
+<pre><code>## [1] &quot;Mean of mpg : 20.090625&quot;
+## [1] &quot;Mean of cyl : 6.1875&quot;
+## [1] &quot;Mean of disp : 230.721875&quot;
+## [1] &quot;Mean of hp : 146.6875&quot;
+## [1] &quot;Mean of drat : 3.5965625&quot;
+## [1] &quot;Mean of wt : 3.21725&quot;
+## [1] &quot;Mean of qsec : 17.84875&quot;
+## [1] &quot;Mean of vs : 0.4375&quot;
+## [1] &quot;Mean of am : 0.40625&quot;
+## [1] &quot;Mean of gear : 3.6875&quot;
+## [1] &quot;Mean of carb : 2.8125&quot;</code></pre>
+<p><em>Determine the type of each column in nycflights13::flights.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(nycflights13<span class="op">::</span>flights)){
+  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="kw">colnames</span>(nycflights13<span class="op">::</span>flights)[i], <span class="st">&quot;:&quot;</span>,
+              <span class="kw">typeof</span>(nycflights13<span class="op">::</span>flights[[i]])))
+}</code></pre></div>
+<pre><code>## [1] &quot;year : integer&quot;
+## [1] &quot;month : integer&quot;
+## [1] &quot;day : integer&quot;
+## [1] &quot;dep_time : integer&quot;
+## [1] &quot;sched_dep_time : integer&quot;
+## [1] &quot;dep_delay : double&quot;
+## [1] &quot;arr_time : integer&quot;
+## [1] &quot;sched_arr_time : integer&quot;
+## [1] &quot;arr_delay : double&quot;
+## [1] &quot;carrier : character&quot;
+## [1] &quot;flight : integer&quot;
+## [1] &quot;tailnum : character&quot;
+## [1] &quot;origin : character&quot;
+## [1] &quot;dest : character&quot;
+## [1] &quot;air_time : double&quot;
+## [1] &quot;distance : double&quot;
+## [1] &quot;hour : double&quot;
+## [1] &quot;minute : double&quot;
+## [1] &quot;time_hour : double&quot;</code></pre>
+<p><em>Compute the number of unique values in each column of iris.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(iris)){
+  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;Number of unique values in&quot;</span>, <span class="kw">colnames</span>(iris)[i], <span class="st">&quot;:&quot;</span>,
+              <span class="kw">length</span>(<span class="kw">unique</span>(iris[[i]]))))
+}</code></pre></div>
+<pre><code>## [1] &quot;Number of unique values in Sepal.Length : 35&quot;
+## [1] &quot;Number of unique values in Sepal.Width : 23&quot;
+## [1] &quot;Number of unique values in Petal.Length : 43&quot;
+## [1] &quot;Number of unique values in Petal.Width : 22&quot;
+## [1] &quot;Number of unique values in Species : 3&quot;</code></pre>
+<p><em>Generate 10 random normals for each of mean = -10, 0, 10, 100.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">normal_means &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>)
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(normal_means)){
+  <span class="kw">print</span>(<span class="kw">paste</span>(<span class="st">&quot;mean:&quot;</span>, normal_means[i]))
+  <span class="kw">print</span>(<span class="kw">rnorm</span>(<span class="dt">n =</span> <span class="dv">10</span>, <span class="dt">mean =</span> normal_means[i], <span class="dt">sd =</span> <span class="dv">1</span>))
+}</code></pre></div>
+<pre><code>## [1] &quot;mean: -10&quot;
+##  [1] -10.563361 -11.547105  -9.610006 -10.858433  -9.490059  -7.914735
+##  [7]  -8.990751  -9.686510  -9.093097  -9.651672
+## [1] &quot;mean: 0&quot;
+##  [1] -1.33475894  1.17713077 -0.10370554  0.97529669  1.04746760
+##  [6]  0.09859368  1.48150980  0.16286577 -0.47510215 -2.18748446
+## [1] &quot;mean: 10&quot;
+##  [1]  9.745161 10.866080 10.357796  9.209245 11.428380  9.668677 10.087604
+##  [8]  9.033929 10.788375 11.936990
+## [1] &quot;mean: 100&quot;
+##  [1] 100.72270  99.32493  99.66521  99.72944  99.46105  99.84259 100.85896
+##  [8]  98.57499 100.40620  98.81463</code></pre>
+<p><em>2. Eliminate the for loop in each of the following examples by taking advantage of an existing function that works with vectors:</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">out &lt;-<span class="st"> &quot;&quot;</span>
+<span class="cf">for</span> (x <span class="cf">in</span> letters) {
+  out &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_c</span>(out, x)
+}</code></pre></div>
+<p>is the same as:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">stringr<span class="op">::</span><span class="kw">str_c</span>(letters, <span class="dt">collapse =</span> <span class="st">&quot;&quot;</span>)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">100</span>)
+sd &lt;-<span class="st"> </span><span class="dv">0</span>
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(x)) {
+  sd &lt;-<span class="st"> </span>sd <span class="op">+</span><span class="st"> </span>(x[i] <span class="op">-</span><span class="st"> </span><span class="kw">mean</span>(x)) <span class="op">^</span><span class="st"> </span><span class="dv">2</span>
+}
+sd &lt;-<span class="st"> </span><span class="kw">sqrt</span>(sd <span class="op">/</span><span class="st"> </span>(<span class="kw">length</span>(x) <span class="op">-</span><span class="st"> </span><span class="dv">1</span>))</code></pre></div>
+<p>is the same as:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">sample</span>(<span class="dv">100</span>)
+<span class="kw">sd</span>(x)</code></pre></div>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">runif</span>(<span class="dv">100</span>)
+out &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;numeric&quot;</span>, <span class="kw">length</span>(x))
+out[<span class="dv">1</span>] &lt;-<span class="st"> </span>x[<span class="dv">1</span>]
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="dv">2</span><span class="op">:</span><span class="kw">length</span>(x)) {
+  out[i] &lt;-<span class="st"> </span>out[i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>] <span class="op">+</span><span class="st"> </span>x[i]
+}</code></pre></div>
+<p>is the same as:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">cumsum</span>(x)</code></pre></div>
+<p><em>3. Combine your function writing and for loop skills:</em></p>
+<p><em>Write a for loop that <code>prints()</code> the lyrics to the children’s song “Alice the camel”.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">alice_the_camel &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="cf">for</span> (i <span class="cf">in</span> x<span class="op">:</span><span class="dv">0</span>){
+    <span class="cf">if</span> (i <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span>){
+      <span class="kw">writeLines</span>(<span class="kw">rep</span>(<span class="kw">paste</span>(<span class="st">&quot;Alice the camel has&quot;</span>, i, <span class="st">&quot;humps.&quot;</span>), <span class="dv">3</span>))
+    } <span class="cf">else</span> <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">1</span>){
+      <span class="kw">writeLines</span>(<span class="kw">rep</span>(<span class="kw">paste</span>(<span class="st">&quot;Alice the camel has&quot;</span>, i, <span class="st">&quot;hump.&quot;</span>), <span class="dv">3</span>))
+    } <span class="cf">else</span> {
+      <span class="kw">writeLines</span>(<span class="kw">rep</span>(<span class="st">&quot;Alice the camel has no humps.&quot;</span>, <span class="dv">3</span>))
+    }
+    
+    <span class="cf">if</span> (i <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>){
+      <span class="kw">writeLines</span>(<span class="st">&quot;So go, Alice, go.</span><span class="ch">\n</span><span class="st">&quot;</span>)
+    } <span class="cf">else</span> {
+      <span class="kw">writeLines</span>(<span class="st">&quot;Now Alice is a horse&quot;</span>)
+    }
+  }
+}
+
+<span class="kw">alice_the_camel</span>(<span class="dv">5</span>)</code></pre></div>
+<pre><code>## Alice the camel has 5 humps.
+## Alice the camel has 5 humps.
+## Alice the camel has 5 humps.
+## So go, Alice, go.
+## 
+## Alice the camel has 4 humps.
+## Alice the camel has 4 humps.
+## Alice the camel has 4 humps.
+## So go, Alice, go.
+## 
+## Alice the camel has 3 humps.
+## Alice the camel has 3 humps.
+## Alice the camel has 3 humps.
+## So go, Alice, go.
+## 
+## Alice the camel has 2 humps.
+## Alice the camel has 2 humps.
+## Alice the camel has 2 humps.
+## So go, Alice, go.
+## 
+## Alice the camel has 1 hump.
+## Alice the camel has 1 hump.
+## Alice the camel has 1 hump.
+## So go, Alice, go.
+## 
+## Alice the camel has no humps.
+## Alice the camel has no humps.
+## Alice the camel has no humps.
+## Now Alice is a horse</code></pre>
+<p><em>Convert the nursery rhyme “ten in the bed” to a function. Generalise it to any number of people in any sleeping structure.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">ten_in_the_bed &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="cf">for</span> (i <span class="cf">in</span> x<span class="op">:</span><span class="dv">1</span>){
+    <span class="kw">writeLines</span>(<span class="kw">paste</span>(<span class="st">&quot;There were&quot;</span>, i, <span class="st">&quot;in the bed&quot;</span>))
+    <span class="kw">writeLines</span>(<span class="st">&quot;And the little one said,&quot;</span>)
+    <span class="cf">if</span> (i <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span>){
+      <span class="kw">writeLines</span>(<span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">Roll over! Roll over!</span><span class="ch">\&quot;</span><span class="st">&quot;</span>)
+      <span class="kw">writeLines</span>(<span class="st">&quot;So they all rolled over and one fell out</span><span class="ch">\n</span><span class="st">&quot;</span>)
+    } <span class="cf">else</span> {
+      <span class="kw">writeLines</span>(<span class="st">&quot;</span><span class="ch">\&quot;</span><span class="st">Alone at last!</span><span class="ch">\&quot;</span><span class="st">&quot;</span>)
+    }
+  }
+}
+
+<span class="kw">ten_in_the_bed</span>(<span class="dv">5</span>)</code></pre></div>
+<pre><code>## There were 5 in the bed
+## And the little one said,
+## &quot;Roll over! Roll over!&quot;
+## So they all rolled over and one fell out
+## 
+## There were 4 in the bed
+## And the little one said,
+## &quot;Roll over! Roll over!&quot;
+## So they all rolled over and one fell out
+## 
+## There were 3 in the bed
+## And the little one said,
+## &quot;Roll over! Roll over!&quot;
+## So they all rolled over and one fell out
+## 
+## There were 2 in the bed
+## And the little one said,
+## &quot;Roll over! Roll over!&quot;
+## So they all rolled over and one fell out
+## 
+## There were 1 in the bed
+## And the little one said,
+## &quot;Alone at last!&quot;</code></pre>
+<p><em>Convert the song “99 bottles of beer on the wall” to a function. Generalise to any number of any vessel containing any liquid on any surface.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">beer &lt;-<span class="st"> </span><span class="cf">function</span>(x){
+  <span class="cf">for</span> (i <span class="cf">in</span> x<span class="op">:</span><span class="dv">0</span>){
+    <span class="cf">if</span> (i <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span>){
+      <span class="kw">writeLines</span>(<span class="kw">paste</span>(i, <span class="st">&quot;bottles of beer on the wall,&quot;</span> ,i, <span class="st">&quot;bottles of beer.&quot;</span>))
+    } <span class="cf">else</span> <span class="cf">if</span> (i <span class="op">==</span><span class="st"> </span><span class="dv">1</span>){
+      <span class="kw">writeLines</span>(<span class="st">&quot;1 bottle of beer on the wall, 1 bottle of beer.&quot;</span>)
+    } <span class="cf">else</span> {
+      <span class="kw">writeLines</span>(<span class="st">&quot;No more bottles of beer on the wall, no more bottles of beer.&quot;</span>)
+    }
+    
+    <span class="cf">if</span> (i <span class="op">-</span><span class="st"> </span><span class="dv">1</span> <span class="op">&gt;=</span><span class="st"> </span><span class="dv">2</span>){
+      <span class="kw">writeLines</span>(<span class="kw">paste</span>(<span class="st">&quot;Take one down and pass it around,&quot;</span>, i <span class="op">-</span><span class="st"> </span><span class="dv">1</span>,
+                       <span class="st">&quot;bottles of beer on the wall.</span><span class="ch">\n</span><span class="st">&quot;</span>))
+    } <span class="cf">else</span> <span class="cf">if</span> (i <span class="op">-</span><span class="st"> </span><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">1</span>){
+      <span class="kw">writeLines</span>(<span class="st">&quot;Take one down and pass it around, 1 bottle of beer on the wall.</span><span class="ch">\n</span><span class="st">&quot;</span>)
+    } <span class="cf">else</span> <span class="cf">if</span> (i <span class="op">-</span><span class="st"> </span><span class="dv">1</span> <span class="op">==</span><span class="st"> </span><span class="dv">0</span>){
+      <span class="kw">writeLines</span>(<span class="st">&quot;Take one down and pass it around, no more bottles of beer on the wall.</span><span class="ch">\n</span><span class="st">&quot;</span>)
+    } <span class="cf">else</span>{
+      <span class="kw">writeLines</span>(<span class="kw">paste</span>(<span class="st">&quot;Go to the store and buy some more,&quot;</span>, x, 
+                       <span class="st">&quot;bottles of beer on the wall.&quot;</span>))
+    }
+  }
+}
+
+<span class="kw">beer</span>(<span class="dv">5</span>)</code></pre></div>
+<pre><code>## 5 bottles of beer on the wall, 5 bottles of beer.
+## Take one down and pass it around, 4 bottles of beer on the wall.
+## 
+## 4 bottles of beer on the wall, 4 bottles of beer.
+## Take one down and pass it around, 3 bottles of beer on the wall.
+## 
+## 3 bottles of beer on the wall, 3 bottles of beer.
+## Take one down and pass it around, 2 bottles of beer on the wall.
+## 
+## 2 bottles of beer on the wall, 2 bottles of beer.
+## Take one down and pass it around, 1 bottle of beer on the wall.
+## 
+## 1 bottle of beer on the wall, 1 bottle of beer.
+## Take one down and pass it around, no more bottles of beer on the wall.
+## 
+## No more bottles of beer on the wall, no more bottles of beer.
+## Go to the store and buy some more, 5 bottles of beer on the wall.</code></pre>
+<p><em>4. It’s common to see for loops that don’t preallocate the output and instead increase the length of a vector at each step:</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;integer&quot;</span>, <span class="dv">0</span>)
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(x)) {
+  output &lt;-<span class="st"> </span><span class="kw">c</span>(output, <span class="kw">lengths</span>(x[[i]]))
+}
+output</code></pre></div>
+<p><em>How does this affect performance? Design and execute an experiment.</em></p>
+<p>As pointed in the text in late section, this is not very efficient because in each iteration, R has to copy all the data from the previous iterations.</p>
+<p>Instead, create an empty list, store the values in the list, and flatten the list to a vector with <code>unlist()</code> at the end.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">output &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="kw">length</span>(x))
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(x)) {
+  output[[i]] &lt;-<span class="st"> </span><span class="kw">lengths</span>(x[[i]])
+}
+<span class="kw">unlist</span>(output)</code></pre></div>
+<p>To Do.</p>
+</div>
+</div>
+<div id="for-loop-variations" class="section level2">
+<h2><span class="header-section-number">21.3</span> For loop variations</h2>
+<div id="exercises-49" class="section level3">
+<h3><span class="header-section-number">21.3.1</span> Exercises</h3>
+<p><em>1. Imagine you have a directory full of CSV files that you want to read in. You have their paths in a vector, <code>files &lt;- dir(&quot;data/&quot;, pattern = &quot;\\.csv$&quot;, full.names = TRUE)</code>, and now want to read each one with <code>read_csv()</code>. Write the for loop that will load them into a single data frame.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">files &lt;-<span class="st"> </span><span class="kw">dir</span>(<span class="st">&quot;data/&quot;</span>, <span class="dt">pattern =</span> <span class="st">&quot;</span><span class="ch">\\</span><span class="st">.csv$&quot;</span>, <span class="dt">full.names =</span> <span class="ot">TRUE</span>)
+csv_list &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&quot;list&quot;</span>, <span class="kw">length</span>(files))
+
+<span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_along</span>(files)){
+  csv_list[[i]] &lt;-<span class="st"> </span><span class="kw">read.csv</span>(files[i])
+}
+
+dplyr<span class="op">::</span><span class="kw">bind_rows</span>(csv_list)</code></pre></div>
+<p><em>2. What happens if you use for <code>(nm in names(x))</code> and <code>x</code> has no names? What if only some of the elements are named? What if the names are not unique?</em></p>
+<p>If <code>x</code> has no names:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>)
+
+<span class="cf">for</span> (nm <span class="cf">in</span> <span class="kw">names</span>(x)){
+  <span class="kw">print</span>(nm)
+}</code></pre></div>
+<p>Nothing is printed, since <code>names(x)</code> returns <code>NULL</code>, the for loop does not run.</p>
+<p>If only some of the elements are named:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;a&quot;</span> =<span class="st"> </span><span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="st">&quot;d&quot;</span> =<span class="st"> </span><span class="dv">4</span>)
+
+<span class="cf">for</span> (nm <span class="cf">in</span> <span class="kw">names</span>(x)){
+  <span class="kw">print</span>(nm)
+}</code></pre></div>
+<pre><code>## [1] &quot;a&quot;
+## [1] &quot;&quot;
+## [1] &quot;&quot;
+## [1] &quot;d&quot;</code></pre>
+<p>The unnamed elements are given an empty character, and the number of iterations is equal to the length of the vector.</p>
+<p>If the vector has non-unique names:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">x &lt;-<span class="st"> </span><span class="kw">setNames</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">4</span>, <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;b&quot;</span>,<span class="st">&quot;c&quot;</span>))
+
+<span class="cf">for</span> (nm <span class="cf">in</span> <span class="kw">names</span>(x)){
+  <span class="kw">print</span>(nm)
+}</code></pre></div>
+<pre><code>## [1] &quot;a&quot;
+## [1] &quot;b&quot;
+## [1] &quot;b&quot;
+## [1] &quot;c&quot;</code></pre>
+<p>Again, the number of iterations is equal to the length of the vector.</p>
+<p><em>3. Write a function that prints the mean of each numeric column in a data frame, along with its name. For example, show_mean(iris) would print:</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">show_mean</span>(iris)
+<span class="co">#&gt; Sepal.Length: 5.84</span>
+<span class="co">#&gt; Sepal.Width:  3.06</span>
+<span class="co">#&gt; Petal.Length: 3.76</span>
+<span class="co">#&gt; Petal.Width:  1.20</span></code></pre></div>
+<p><em>(Extra challenge: what function did I use to make sure that the numbers lined up nicely, even though the variable names had different lengths?)</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">show_mean &lt;-<span class="st"> </span><span class="cf">function</span>(df){
+  <span class="co">#empty vectors to store variable names and means</span>
+  start_sentence &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&#39;character&#39;</span>, <span class="kw">ncol</span>(df))
+  col_means &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&#39;double&#39;</span>, <span class="kw">ncol</span>(df))
+  
+  <span class="co">#get names and means</span>
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">ncol</span>(df))){
+    start_sentence[i] &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="kw">names</span>(df)[i], <span class="st">&quot;:&quot;</span>)
+    col_means[i] &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">mean</span>(df[[i]]),<span class="dv">2</span>)
+  }
+  
+  <span class="co">#get max length of names and pad the shorter names</span>
+  start_sentence &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_pad</span>(start_sentence, <span class="kw">max</span>(<span class="kw">nchar</span>(start_sentence)),
+                                     <span class="dt">side =</span> <span class="st">&quot;right&quot;</span>, <span class="dt">pad =</span> <span class="st">&quot; &quot;</span>)
+  
+  <span class="co">#writeLines</span>
+  <span class="kw">writeLines</span>(<span class="kw">paste</span>(start_sentence, col_means))
+}
+
+<span class="kw">show_mean</span>(mtcars)</code></pre></div>
+<pre><code>## mpg:  20.09
+## cyl:  6.19
+## disp: 230.72
+## hp:   146.69
+## drat: 3.6
+## wt:   3.22
+## qsec: 17.85
+## vs:   0.44
+## am:   0.41
+## gear: 3.69
+## carb: 2.81</code></pre>
+<p><em>4. What does this code do? How does it work?</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">trans &lt;-<span class="st"> </span><span class="kw">list</span>( 
+  <span class="dt">disp =</span> <span class="cf">function</span>(x) x <span class="op">*</span><span class="st"> </span><span class="fl">0.0163871</span>,
+  <span class="dt">am =</span> <span class="cf">function</span>(x) {
+    <span class="kw">factor</span>(x, <span class="dt">labels =</span> <span class="kw">c</span>(<span class="st">&quot;auto&quot;</span>, <span class="st">&quot;manual&quot;</span>))
+  }
+)
+<span class="cf">for</span> (var <span class="cf">in</span> <span class="kw">names</span>(trans)) {
+  mtcars[[var]] &lt;-<span class="st"> </span>trans[[var]](mtcars[[var]])
+}</code></pre></div>
+<p>A list can be used to store functions. The list <code>trans</code> stores two functions: <code>disp</code> to multiply the numerical values by a constant, and <code>am</code> creates a factor of two levels.</p>
+<p>The for loop runs through the names in the list <code>trans</code> (in this case, only <code>disp</code> and <code>am</code>), then call the appropriate function, converts the values in the column and saves it.</p>
+</div>
+</div>
+<div id="for-loops-vs.functionals" class="section level2">
+<h2><span class="header-section-number">21.4</span> For loops vs. functionals</h2>
+<div id="exercises-50" class="section level3">
+<h3><span class="header-section-number">21.4.1</span> Exercises</h3>
+<p><em>1. Read the documentation for apply(). In the 2d case, what two for loops does it generalise?</em></p>
+<p>By rows and by columns.</p>
+<p><em>2. Adapt col_summary() so that it only applies to numeric columns. You might want to start with an is_numeric() function that returns a logical vector that has a TRUE corresponding to each numeric column.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">col_summary &lt;-<span class="st"> </span><span class="cf">function</span>(df, fun){
+  df2 &lt;-<span class="st"> </span>df[,<span class="kw">sapply</span>(df, is.numeric)]
+
+  start_sentence &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&#39;character&#39;</span>, <span class="kw">ncol</span>(df2))
+  col_means &lt;-<span class="st"> </span><span class="kw">vector</span>(<span class="st">&#39;double&#39;</span>, <span class="kw">ncol</span>(df2))
+  
+  <span class="co">#get names and means</span>
+  <span class="cf">for</span> (i <span class="cf">in</span> <span class="kw">seq_len</span>(<span class="kw">ncol</span>(df2))){
+    start_sentence[i] &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="kw">names</span>(df2)[i], <span class="st">&quot;:&quot;</span>)
+    col_means[i] &lt;-<span class="st"> </span><span class="kw">round</span>(<span class="kw">fun</span>(df2[[i]]),<span class="dv">2</span>)
+  }
+  
+  <span class="co">#get max length of names and pad the shorter names</span>
+  start_sentence &lt;-<span class="st"> </span>stringr<span class="op">::</span><span class="kw">str_pad</span>(start_sentence, <span class="kw">max</span>(<span class="kw">nchar</span>(start_sentence)),
+                                     <span class="dt">side =</span> <span class="st">&quot;right&quot;</span>, <span class="dt">pad =</span> <span class="st">&quot; &quot;</span>)
+  
+  <span class="co">#writeLines</span>
+  <span class="kw">writeLines</span>(<span class="kw">paste</span>(start_sentence, col_means))
+}
+
+<span class="kw">col_summary</span>(iris, mean)</code></pre></div>
+<pre><code>## Sepal.Length: 5.84
+## Sepal.Width:  3.06
+## Petal.Length: 3.76
+## Petal.Width:  1.2</code></pre>
+</div>
+</div>
+<div id="the-map-functions" class="section level2">
+<h2><span class="header-section-number">21.5</span> The map functions</h2>
+<div id="exercises-51" class="section level3">
+<h3><span class="header-section-number">21.5.1</span> Exercises</h3>
+<p><em>1. Write code that uses one of the map functions to:</em></p>
+<p><em>Compute the mean of every column in mtcars.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map_dbl</span>(mtcars, mean) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">round</span>(<span class="dv">2</span>)</code></pre></div>
+<pre><code>##    mpg    cyl   disp     hp   drat     wt   qsec     vs     am   gear 
+##  20.09   6.19 230.72 146.69   3.60   3.22  17.85   0.44   0.41   3.69 
+##   carb 
+##   2.81</code></pre>
+<p><em>Determine the type of each column in nycflights13::flights.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map_chr</span>(nycflights13<span class="op">::</span>flights, typeof)</code></pre></div>
+<pre><code>##           year          month            day       dep_time sched_dep_time 
+##      &quot;integer&quot;      &quot;integer&quot;      &quot;integer&quot;      &quot;integer&quot;      &quot;integer&quot; 
+##      dep_delay       arr_time sched_arr_time      arr_delay        carrier 
+##       &quot;double&quot;      &quot;integer&quot;      &quot;integer&quot;       &quot;double&quot;    &quot;character&quot; 
+##         flight        tailnum         origin           dest       air_time 
+##      &quot;integer&quot;    &quot;character&quot;    &quot;character&quot;    &quot;character&quot;       &quot;double&quot; 
+##       distance           hour         minute      time_hour 
+##       &quot;double&quot;       &quot;double&quot;       &quot;double&quot;       &quot;double&quot;</code></pre>
+<p><em>Compute the number of unique values in each column of iris.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map_int</span>(iris, dplyr<span class="op">::</span>n_distinct)</code></pre></div>
+<pre><code>## Sepal.Length  Sepal.Width Petal.Length  Petal.Width      Species 
+##           35           23           43           22            3</code></pre>
+<p><em>Generate 10 random normals for each of mean = -10, 0, 10, 100</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">r_means &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="op">-</span><span class="dv">10</span>, <span class="dv">0</span>, <span class="dv">10</span>, <span class="dv">100</span>)
+
+purrr<span class="op">::</span><span class="kw">map</span>(r_means, rnorm, <span class="dt">n =</span> <span class="dv">10</span>)</code></pre></div>
+<pre><code>## [[1]]
+##  [1]  -9.439750  -8.803203 -11.033268  -8.932672 -10.200627  -9.910421
+##  [7] -10.013396 -10.490332 -10.948487  -9.757642
+## 
+## [[2]]
+##  [1] -0.5364204  1.4800243 -0.7883756 -1.0642365 -0.1955066 -0.4340894
+##  [7] -0.1565100  1.3706622 -1.1438224 -0.1054658
+## 
+## [[3]]
+##  [1]  9.420518 10.631077  9.986825 10.452168  7.210611 10.360478 10.445818
+##  [8]  9.250952 11.334013 10.488257
+## 
+## [[4]]
+##  [1] 101.05380  99.10756  99.24149 101.22868 100.70151 100.12729 101.41284
+##  [8] 100.78254 101.19970 102.00230</code></pre>
+<p><em>2. How can you create a single vector that for each column in a data frame indicates whether or not it’s a factor?</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map_lgl</span>(mtcars, is.factor)</code></pre></div>
+<pre><code>##   mpg   cyl  disp    hp  drat    wt  qsec    vs    am  gear  carb 
+## FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE FALSE</code></pre>
+<p><em>3. What happens when you use the map functions on vectors that aren’t lists? What does <code>map(1:5, runif)</code> do? Why?</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">purrr<span class="op">::</span><span class="kw">map</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, runif)</code></pre></div>
+<pre><code>## [[1]]
+## [1] 0.2212084
+## 
+## [[2]]
+## [1] 0.004146634 0.928893832
+## 
+## [[3]]
+## [1] 0.9507205 0.2135208 0.8999193
+## 
+## [[4]]
+## [1] 0.5345054 0.6522360 0.8355621 0.3297500
+## 
+## [[5]]
+## [1] 0.396253151 0.367061472 0.004636787 0.290923828 0.312653029</code></pre>
+<p>It applies the function on each element in the vector. <code>map(1:5, runif)</code> applies the function <code>runif()</code> on 1, 2, 3, 4, and 5 individual, and return the results in a list (of length of 5).</p>
+<p><em>4. What does <code>map(-2:2, rnorm, n = 5)</code> do? Why? What does <code>map_dbl(-2:2, rnorm, n = 5)</code> do? Why?</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">purrr<span class="op">::</span><span class="kw">map</span>(<span class="op">-</span><span class="dv">2</span><span class="op">:</span><span class="dv">2</span>, rnorm, <span class="dt">n =</span> <span class="dv">5</span>)</code></pre></div>
+<pre><code>## [[1]]
+## [1] -2.4413302 -1.5927285 -2.5425904 -1.5266702 -0.3473109
+## 
+## [[2]]
+## [1] -1.503954 -1.283089 -0.306981 -1.252188 -2.619766
+## 
+## [[3]]
+## [1] 0.1844547 1.0780249 0.8851634 0.8101881 0.2684200
+## 
+## [[4]]
+## [1]  0.4162352  0.5131799 -1.1057388  0.6057158  0.7301846
+## 
+## [[5]]
+## [1] 0.06345205 1.29128753 3.25939610 2.38084050 1.33280825</code></pre>
+<p><code>map(-2:2, rnorm, n = 5)</code> applies the function <code>rnorm()</code>, with the argument <code>n = 5</code> on each of the element in -2:2. <code>rnorm()</code> treats -2:2 as the input for its first remaining argument by position, which is the mean of the normal distribution. The function returns a list.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="op">&gt;</span><span class="st"> </span><span class="kw">map_dbl</span>(<span class="op">-</span><span class="dv">2</span><span class="op">:</span><span class="dv">2</span>, rnorm, <span class="dt">n =</span> <span class="dv">5</span>)
+
+<span class="co">#Error: Result 1 is not a length 1 atomic vector</span></code></pre></div>
+<p><code>map_dbl(-2:2, rnorm, n = 5)</code> will not work because <code>map_dbl</code> returns an atomic vector. Each element can only store value of length of 1. If we change <code>n = 5</code> to <code>n = 1</code>:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">map_dbl</span>(<span class="op">-</span><span class="dv">2</span><span class="op">:</span><span class="dv">2</span>, rnorm, <span class="dt">n =</span> <span class="dv">1</span>)</code></pre></div>
+<pre><code>## [1] -3.1958272 -1.3122468 -0.5312978  2.4671638  0.6778924</code></pre>
+<p>Then it will work.</p>
+<p><em>5. Rewrite <code>map(x, function(df) lm(mpg ~ wt, data = df))</code> to eliminate the anonymous function.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">purrr<span class="op">::</span><span class="kw">map</span>(<span class="kw">list</span>(mtcars), <span class="op">~</span><span class="kw">lm</span>(mpg <span class="op">~</span><span class="st"> </span>wt, <span class="dt">data =</span> .))</code></pre></div>
+<pre><code>## [[1]]
+## 
+## Call:
+## lm(formula = mpg ~ wt, data = .)
+## 
+## Coefficients:
+## (Intercept)           wt  
+##      37.285       -5.344</code></pre>
+</div>
+</div>
+<div id="dealing-with-failure" class="section level2">
+<h2><span class="header-section-number">21.6</span> Dealing with failure</h2>
+<p>No exercises.</p>
+</div>
+<div id="mapping-over-multiple-arguments" class="section level2">
+<h2><span class="header-section-number">21.7</span> Mapping over multiple arguments</h2>
+<p>No exercises.</p>
+</div>
+<div id="walk" class="section level2">
+<h2><span class="header-section-number">21.8</span> Walk</h2>
+<p>No exercises</p>
+</div>
+<div id="other-patterns-of-for-loops" class="section level2">
+<h2><span class="header-section-number">21.9</span> Other patterns of for loops</h2>
+<div id="exercises-52" class="section level3">
+<h3><span class="header-section-number">21.9.1</span> Exercises</h3>
+<p><em>1. Implement your own version of <code>every()</code> using a for loop. Compare it with <code>purrr::every()</code>. What does purrr’s version do that your version doesn’t?</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">my_every &lt;-<span class="st"> </span><span class="cf">function</span>(x, .p){
+  check &lt;-<span class="st"> </span><span class="kw">sapply</span>(x, .p)
+  <span class="cf">if</span> (<span class="kw">mean</span>(check) <span class="op">==</span><span class="st"> </span><span class="dv">1</span>){
+    <span class="kw">return</span>(<span class="ot">TRUE</span>)
+  } <span class="cf">else</span> {
+    <span class="kw">return</span>(<span class="ot">FALSE</span>)
+  }
+}
+
+<span class="kw">my_every</span>(mtcars, is.numeric)</code></pre></div>
+<pre><code>## [1] TRUE</code></pre>
+<p><em>2. Create an enhanced <code>col_sum()</code> that applies a summary function to every numeric column in a data frame.</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">col_sum &lt;-<span class="st"> </span><span class="cf">function</span>(df){
+  df &lt;-<span class="st"> </span><span class="kw">keep</span>(df, is.numeric)
+  
+  <span class="kw">return</span>(purrr<span class="op">::</span><span class="kw">map</span>(df, summary))
+}
+
+<span class="kw">col_sum</span>(iris)</code></pre></div>
+<pre><code>## $Sepal.Length
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   4.300   5.100   5.800   5.843   6.400   7.900 
+## 
+## $Sepal.Width
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   2.000   2.800   3.000   3.057   3.300   4.400 
+## 
+## $Petal.Length
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   1.000   1.600   4.350   3.758   5.100   6.900 
+## 
+## $Petal.Width
+##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##   0.100   0.300   1.300   1.199   1.800   2.500</code></pre>
+<p><em>3. A possible base R equivalent of <code>col_sum()</code> is:</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">col_sum3 &lt;-<span class="st"> </span><span class="cf">function</span>(df, f) {
+  is_num &lt;-<span class="st"> </span><span class="kw">sapply</span>(df, is.numeric)
+  df_num &lt;-<span class="st"> </span>df[, is_num]
+
+  <span class="kw">sapply</span>(df_num, f)
+}</code></pre></div>
+<p><em>But it has a number of bugs as illustrated with the following inputs:</em></p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">df &lt;-<span class="st"> </span><span class="kw">tibble</span>(
+  <span class="dt">x =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">3</span>, 
+  <span class="dt">y =</span> <span class="dv">3</span><span class="op">:</span><span class="dv">1</span>,
+  <span class="dt">z =</span> <span class="kw">c</span>(<span class="st">&quot;a&quot;</span>, <span class="st">&quot;b&quot;</span>, <span class="st">&quot;c&quot;</span>)
+)
+<span class="co"># OK</span>
+<span class="kw">col_sum3</span>(df, mean)
+<span class="co"># Has problems: don&#39;t always return numeric vector</span>
+<span class="kw">col_sum3</span>(df[<span class="dv">1</span><span class="op">:</span><span class="dv">2</span>], mean)
+<span class="kw">col_sum3</span>(df[<span class="dv">1</span>], mean)
+<span class="kw">col_sum3</span>(df[<span class="dv">0</span>], mean)</code></pre></div>
+<p><em>What causes the bugs?</em></p>
+<p>The function fails if the filtered data frame has zero columns. Here is a modified version of <code>col_num3()</code> that will prevent the problem:</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">col_sum3 &lt;-<span class="st"> </span><span class="cf">function</span>(df, f) {
+  is_num &lt;-<span class="st"> </span><span class="kw">sapply</span>(df, is.numeric)
+  <span class="cf">if</span> (<span class="kw">sum</span>(is_num) <span class="op">&gt;=</span><span class="st"> </span><span class="dv">1</span>){
+    df_num &lt;-<span class="st"> </span>df[, is_num]
+    <span class="kw">sapply</span>(df_num, f)
+  } <span class="cf">else</span>{
+    <span class="ot">NULL</span>
+  }
+}</code></pre></div>
+
+</div>
+</div>
+</div>
+
+
+
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="vectors.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="introduction-17.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"download": ["R4DS bookdown.pdf"],
+"toc": {
+"collapse": "section"
+}
+});
+});
+</script>
+
+</body>
+
+</html>
