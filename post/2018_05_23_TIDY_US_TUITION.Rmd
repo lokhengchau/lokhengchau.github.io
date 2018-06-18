@@ -22,7 +22,7 @@ The purpose of this post, and future posts related to #TidyTuesday, is to docume
 The original dataset contains the average college tuition cost, based on in-state tuition and fees for one year of full-time study at public four-year institutions, of every state (excluding DC) from the year of 2004 to 2016. Each row represents a state, and each column corresponds to an academic year. The first 5 rows and the first 5 columns of the dataset:
 
 ```{r include = FALSE}
-df <- readxl::read_xlsx('C:/Users/LokHeng/Desktop/Rstuff/US_avg_tuition/us_avg_tuition.xlsx')
+df <- readxl::read_xlsx('C:/Users/LokHeng/Desktop/Rstuff/TidyTuesday/US_avg_tuition/us_avg_tuition.xlsx')
 
 library(tidyverse)
 library(scales)
